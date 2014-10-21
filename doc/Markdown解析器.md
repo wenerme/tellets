@@ -1,21 +1,21 @@
-Markdown ½âÎöÆ÷
+Markdown è§£æå™¨
 ===============
 
-À©Õ¹ÃûÆ¥Åä
+æ‰©å±•ååŒ¹é…
 ---------
 
 .(markdown|md|mdown|mkd|mkdn|mdwn|mdtxt|mdtext|text)
 
-²Î¿¼ [file-extension-for-markdown-files](http://superuser.com/questions/249436/) on stackoverflow.
+å‚è€ƒ [file-extension-for-markdown-files](http://superuser.com/questions/249436/) on stackoverflow.
 
-Meta ¸ñÊ½
+Meta æ ¼å¼
 ---------
 
-* Ê¹ÓÃ HTML ×¢ÊÍ¸ñÊ½Ö¸¶¨ÔªĞÅÏ¢ `<!-- key:value -->`
-* ¶àÖµ·Ö¸î·û `,|`
-* more Æ¥Åä¸ñÊ½ `^\s*<!--\s*more\s*-->\s*$`
+* ä½¿ç”¨ HTML æ³¨é‡Šæ ¼å¼æŒ‡å®šå…ƒä¿¡æ¯ `<!-- key:value -->`
+* å¤šå€¼åˆ†å‰²ç¬¦ `,|`
+* more åŒ¹é…æ ¼å¼ `^\s*<!--\s*more\s*-->\s*$`
 
-ÊµÏÖ
+å®ç°
 ----
 
 pegdown

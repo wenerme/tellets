@@ -10,3 +10,8 @@
 
 参考实现
 http://coapp.org/reference/garrett-flavored-markdown.html
+
+post vs article
+---------------
+* http://en.support.wordpress.com/post-vs-page/
+* http://www.softimageblog.com/posts-vs-articles

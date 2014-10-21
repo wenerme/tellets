@@ -1,4 +1,4 @@
-package me.wener.telletsj.core;
+package me.wener.telletsj.collect;
 
 import me.wener.telletsj.collect.CollectSource;
 
