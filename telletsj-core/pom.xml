@@ -107,6 +107,20 @@
             <version>${pegdown.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>3.5.1.201410131835-r</version>
+        </dependency>
+
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>com.gitblit</id>
+            <name>Gitblit</name>
+            <url>http://gitblit.github.io/gitblit-maven/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>
