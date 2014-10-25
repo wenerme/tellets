@@ -13,24 +13,9 @@ public class LazyFileLoadSourceContent extends SourceContent
     }
 
     @Override
-    public String getHash()
-    {
-        // 延迟 hash
-        if (super.getHash() == null)
-        {
-            fillContent();
-            setHash(CollectUtil.hash(getContent()));
-        }
-
-        return super.getHash();
-    }
-
-    @Override
     @SneakyThrows
-    public void fillContent()
+    protected void fillContent0()
     {
-        // 延迟内容
-        if (getContent() == null)
-            setContent(CollectUtil.readString(file));
+        setContent(CollectUtil.readString(file));
     }
 }

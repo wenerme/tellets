@@ -100,7 +100,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.pegdown</groupId>
             <artifactId>pegdown</artifactId>
@@ -108,9 +107,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.eclipse.jgit</groupId>
-            <artifactId>org.eclipse.jgit</artifactId>
-            <version>3.5.1.201410131835-r</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-vfs2</artifactId>
+            <version>${commons-vfs2.version}</version>
         </dependency>
 
     </dependencies>

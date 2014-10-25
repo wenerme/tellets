@@ -11,6 +11,9 @@
 参考实现
 http://coapp.org/reference/garrett-flavored-markdown.html
 
+参考主题设计
+http://robots.thoughtbot.com/a-tmux-crash-course
+
 post vs article
 ---------------
 * http://en.support.wordpress.com/post-vs-page/

@@ -1,4 +1,4 @@
-package me.wener.telletsj;
+package me.wener.telletsj.core;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -12,6 +12,7 @@ public class TelletsJ
 {
     @Getter
     private final TelletsJConfig config;
+    private Injector injector;
 
     public TelletsJ(TelletsJConfig config) {this.config = config;}
 
@@ -22,6 +23,7 @@ public class TelletsJ
 
     public void start()
     {
-        Injector injector = Guice.createInjector(Stage.DEVELOPMENT, new TelletsJModule());
+        injector = Guice.createInjector(Stage.DEVELOPMENT, new TelletsJModule());
     }
+
 }

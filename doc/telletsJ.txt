@@ -29,4 +29,28 @@ telletsJ
 	能替换掉现有的 tellets
 	
 	
-	
+
+Telletsj
+管理模块
+	manage
+  管理
+  配置
+收集模块
+	collect
+	最主要的目的就是收集内容
+	common-vfs 在这里很适合
+	最主要的收集目标
+		GitHub
+		在common-vfs的基础上实现GitHub的访问,包括授权
+
+处理模块
+	process
+	获取文章基本信息
+		连接
+插件扩展模块
+	plugin
+实体对象模块
+	article
+核心模块
+	core
+	关联以上所有的模块,其实成为一个整体

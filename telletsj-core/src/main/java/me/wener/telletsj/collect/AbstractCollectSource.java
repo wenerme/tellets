@@ -14,12 +14,12 @@ public abstract class AbstractCollectSource implements CollectSource
         this.config = config;
     }
 
-    public abstract Iterable<SourceContent> collect();
+    public abstract Iterable<SourceContent> collect() throws CollectionException;
 
     @Override
     public boolean isChanged()
     {
-        return false;
+        return true;
     }
 
     @Override

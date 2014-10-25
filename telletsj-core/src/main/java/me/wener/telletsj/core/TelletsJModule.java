@@ -1,8 +1,5 @@
-package me.wener.telletsj;
+package me.wener.telletsj.core;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Binder;
-import com.google.inject.Module;
 import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 import me.wener.telletsj.util.guice.BaseModule;

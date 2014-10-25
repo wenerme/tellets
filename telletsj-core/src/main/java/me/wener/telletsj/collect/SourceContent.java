@@ -34,8 +34,29 @@ public class SourceContent
     /**
      * 填充内容,在有些情况下内容可以考虑延迟获取
      */
-    public void fillContent()
+    public final void fillContent()
     {
-        source.fillContent(this);
+        if (content == null)
+            fillContent0();
+    }
+    public final String getHash()
+    {
+        // 延迟 hash
+        if (hash == null)
+        {
+            getHash0();
+        }
+
+        return hash;
+    }
+
+    protected void getHash0()
+    {
+        fillContent();
+        setHash(CollectUtil.hash(getContent()));
+    }
+
+    protected void fillContent0()
+    {
     }
 }

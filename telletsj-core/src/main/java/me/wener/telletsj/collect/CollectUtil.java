@@ -3,12 +3,19 @@ package me.wener.telletsj.collect;
 import com.google.common.base.Preconditions;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
+import com.google.common.io.CharStreams;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+/**
+ * 搜集数据时的辅助操作类
+ */
+@SuppressWarnings("unused")
 public class CollectUtil
 {
     public static final HashFunction HASH_FUNCTION = Hashing.sha1();
@@ -34,9 +41,13 @@ public class CollectUtil
     }
 
 
-
     public static String readString(File file) throws IOException
     {
         return new String(Files.readAllBytes(file.toPath()), DEFAULT_CHARSET);
+    }
+
+    public static String readString(InputStream inputStream) throws IOException
+    {
+        return CharStreams.toString(new InputStreamReader(inputStream, DEFAULT_CHARSET));
     }
 }
