@@ -1,8 +1,6 @@
 package me.wener.telletsj.collect;
 
-import java.util.List;
 import java.util.Set;
-import javax.inject.Provider;
 
 public interface SourceProvider
 {
