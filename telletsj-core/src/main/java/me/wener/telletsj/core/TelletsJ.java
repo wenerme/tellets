@@ -3,10 +3,7 @@ package me.wener.telletsj.core;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Stage;
-import com.mycila.guice.ext.closeable.CloseableModule;
-import com.mycila.guice.ext.jsr250.Jsr250Module;
 import lombok.Getter;
-import me.wener.telletsj.util.guice.ChainInjector;
 
 public class TelletsJ
 {

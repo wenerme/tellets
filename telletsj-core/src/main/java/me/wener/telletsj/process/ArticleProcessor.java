@@ -10,8 +10,7 @@ public interface ArticleProcessor
 {
 
     /**
-     *
-     * @return 如果无法处理,则返回 {@code null}
+     * @return 如果无法处理, 则返回 {@code null}
      * @throws ProcessException 在处理过程中发生异常
      */
     Article process(SourceContent content) throws ProcessException;

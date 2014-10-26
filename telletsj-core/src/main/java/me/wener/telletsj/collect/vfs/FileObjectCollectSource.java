@@ -1,13 +1,8 @@
 package me.wener.telletsj.collect.vfs;
 
-import com.google.common.base.Function;
-import com.google.common.base.Throwables;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import java.util.Arrays;
 import java.util.List;
 import me.wener.telletsj.collect.AbstractCollectSource;
-import me.wener.telletsj.collect.CollectSource;
 import me.wener.telletsj.collect.CollectionException;
 import me.wener.telletsj.collect.SourceContent;
 import org.apache.commons.vfs2.FileObject;
@@ -23,10 +18,26 @@ public class FileObjectCollectSource extends AbstractCollectSource
         this.file = file;
     }
 
+    private static List<FileObject> getAllChildren(FileObject file, List<FileObject> all) throws FileSystemException
+    {
+        if (file.getType() == FileType.FILE)
+        {
+            all.add(file);
+        } else
+        {
+            for (FileObject fileObject : file.getChildren())
+            {
+                getAllChildren(fileObject, all);
+            }
+        }
+        return all;
+    }
+
     @Override
     public Iterable<SourceContent> collect() throws CollectionException
     {
-        try{
+        try
+        {
             if (file.getType() == FileType.FILE)
             {
                 return Lists.<SourceContent>newArrayList(new FileObjectSourceContent(file));
@@ -39,23 +50,9 @@ public class FileObjectCollectSource extends AbstractCollectSource
                 contents.add(new FileObjectSourceContent(fileObject));
             }
             return contents;
-        }catch (FileSystemException e)
+        } catch (FileSystemException e)
         {
             throw new CollectionException(e);
         }
-    }
-
-    private static List<FileObject> getAllChildren(FileObject file, List<FileObject> all) throws FileSystemException
-    {
-        if (file.getType() == FileType.FILE)
-        {
-            all.add(file);
-        }else {
-            for (FileObject fileObject : file.getChildren())
-            {
-                getAllChildren(fileObject, all);
-            }
-        }
-        return all;
     }
 }

@@ -5,18 +5,12 @@ import com.google.common.base.Predicate;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
 
 /**
  * 目录数据源
  */
 public class DirectoryLookupCollectionSource extends AbstractCollectSource
 {
-    private File root;
     private static final Predicate<File> IGNORE_HIDDEN_FILE = new Predicate<File>()
     {
         @Override
@@ -33,6 +27,7 @@ public class DirectoryLookupCollectionSource extends AbstractCollectSource
             return CollectUtil.fileToSourceContent(file);
         }
     };
+    private File root;
 
     public DirectoryLookupCollectionSource(File root) throws IOException
     {

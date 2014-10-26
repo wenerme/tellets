@@ -30,8 +30,8 @@ class BlobObject extends BaseObject
         if ("base64".equals(encoding))
         {
             byte[] bytes = DatatypeConverter.parseBase64Binary(content);
-            rawContent =  new String(bytes, charset);
-        }else
+            rawContent = new String(bytes, charset);
+        } else
             rawContent = content;
 
         return rawContent;

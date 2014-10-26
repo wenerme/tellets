@@ -9,6 +9,8 @@ import me.wener.telletsj.collect.SourceContent;
 public interface ProcessService
 {
     Article process(SourceContent content) throws ProcessException;
+
     void register(ArticleProcessor processor);
+
     void register(Class<? extends ArticleProcessor> clazz);
 }

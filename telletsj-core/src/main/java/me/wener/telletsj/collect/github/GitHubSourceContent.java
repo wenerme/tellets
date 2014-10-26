@@ -1,9 +1,7 @@
 package me.wener.telletsj.collect.github;
 
 import com.google.common.base.Preconditions;
-import com.google.common.io.Files;
 import java.io.File;
-import java.net.URL;
 import me.wener.telletsj.collect.SourceContent;
 
 public class GitHubSourceContent extends SourceContent

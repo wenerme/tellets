@@ -4,7 +4,6 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import lombok.Data;
-import me.wener.telletsj.collect.CollectSource;
 
 /**
  * 收集到的内容<br>
@@ -13,6 +12,10 @@ import me.wener.telletsj.collect.CollectSource;
 @Data
 public class SourceContent
 {
+    /**
+     * 该源的属性
+     */
+    private final Map<String, Object> properties = Maps.newConcurrentMap();
     private CollectSource source;
     /**
      * 文件名
@@ -28,11 +31,6 @@ public class SourceContent
     private String hash;
 
     /**
-     * 该源的属性
-     */
-    private final Map<String,Object> properties = Maps.newConcurrentMap();
-
-    /**
      * 填充内容,在有些情况下内容可以考虑延迟获取
      */
     public final void fillContent() throws CollectionException
@@ -40,6 +38,7 @@ public class SourceContent
         if (content == null)
             fillContent0();
     }
+
     public final String getHash()
     {
         // 延迟 hash

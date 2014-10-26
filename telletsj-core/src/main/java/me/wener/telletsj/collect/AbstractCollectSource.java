@@ -10,7 +10,7 @@ public abstract class AbstractCollectSource implements CollectSource
 
     public void setConfig(CollectSourceConfig config)
     {
-        Preconditions.checkState(config == null,"Config already set");
+        Preconditions.checkState(config == null, "Config already set");
         this.config = config;
     }
 

@@ -1,6 +1,5 @@
 package me.wener.telletsj.collect.github;
 
-import java.io.IOException;
 import me.wener.telletsj.collect.CollectionException;
 
 public class GitHubException extends CollectionException

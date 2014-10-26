@@ -25,6 +25,7 @@ public class SysUtils
     {
         return tryGetResourceAsString(path, Charsets.UTF_8);
     }
+
     public static String tryGetResourceAsString(String path, Charset charset)
     {
         String string = null;
@@ -44,6 +45,7 @@ public class SysUtils
         }
         return string;
     }
+
     public static InputStream tryGetResource(String path)
     {
         InputStream is = SysUtils.class.getClassLoader().getResourceAsStream(path);
@@ -98,10 +100,10 @@ public class SysUtils
                 .append(reportMemory(runtime.totalMemory()))
                 .append('\n')
                 .append("Used memory: ")
-                .append(reportMemory(runtime.totalMemory()-runtime.freeMemory()))
+                .append(reportMemory(runtime.totalMemory() - runtime.freeMemory()))
                 .append('\n')
                 .append("Memory usage: ")
-                .append((1-runtime.freeMemory()/(double)runtime.totalMemory()) * 100)
+                .append((1 - runtime.freeMemory() / (double) runtime.totalMemory()) * 100)
                 .append(" %")
                 .append('\n')
         ;
@@ -112,6 +114,6 @@ public class SysUtils
     private static String reportMemory(double val)
     {
         val /= 1024;
-        return String.format(" %.4f KB | %.4f MB | %.4f GB", val, val/1024, val/1024/1024);
+        return String.format(" %.4f KB | %.4f MB | %.4f GB", val, val / 1024, val / 1024 / 1024);
     }
 }

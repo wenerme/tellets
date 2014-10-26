@@ -11,6 +11,6 @@ public abstract class BaseModule<SELF extends AbstractModule> extends AbstractMo
     protected SELF install(Class<? extends Module> clazz)
     {
         install(clazz.newInstance());
-        return (SELF)this;
+        return (SELF) this;
     }
 }
