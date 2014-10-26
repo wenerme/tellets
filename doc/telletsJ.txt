@@ -54,3 +54,10 @@ Telletsj
 核心模块
 	core
 	关联以上所有的模块,其实成为一个整体
+
+
+GitHub provider
+---------------
+只是将路径转换为https
+URI规范
+github:username/project[:branch]/path/to/file
