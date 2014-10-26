@@ -1,16 +1,19 @@
 package me.wener.telletsj.collect.github;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.concurrent.Immutable;
 import lombok.Data;
 
 @Data
+@Immutable
 public class GitHubRepo
 {
-    private static final String REG_INFO_URI = "^github: # 固定模式前缀\n" +
+    private static final String REG_INFO_URI = "^(github:)? # 可选的模式前缀\n" +
             "(?<user>\\w+)/(?<repository>\\w+) # 用户名和仓库信息部分 \n" +
-            "(:(?<branch>\\w+))?\n" +
+            "(:(?<branch>\\w+))? # 可选的分支部分\n" +
             "(?<path>.*)?$";
     private static final Pattern PAT_INFO_URI = Pattern.compile(REG_INFO_URI, Pattern.COMMENTS);
     private final String user;
@@ -40,12 +43,13 @@ public class GitHubRepo
 
     public String getBranchUrl()
     {
-        return "https://api.github.com/repos/" + user + "/" + repository + (branch == null ? "master" : branch);
+        String url = "https://api.github.com/repos/%s/%s/branches/%s";
+        return String.format(url, user, repository, branch == null ? "master" : branch);
     }
 
     @Override
     public String toString()
     {
-        return "github:" + user + "/" + repository + (branch == null ? "" : branch) + path;
+        return "github:" + user + "/" + repository + (branch == null ? "" : ":" + branch) + Strings.nullToEmpty(path);
     }
 }

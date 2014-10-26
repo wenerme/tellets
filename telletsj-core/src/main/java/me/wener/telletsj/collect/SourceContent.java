@@ -1,5 +1,6 @@
 package me.wener.telletsj.collect;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import lombok.Data;
@@ -34,7 +35,7 @@ public class SourceContent
     /**
      * 填充内容,在有些情况下内容可以考虑延迟获取
      */
-    public final void fillContent()
+    public final void fillContent() throws CollectionException
     {
         if (content == null)
             fillContent0();
@@ -44,19 +45,25 @@ public class SourceContent
         // 延迟 hash
         if (hash == null)
         {
-            getHash0();
+            try
+            {
+                getHash0();
+            } catch (CollectionException e)
+            {
+                Throwables.propagate(e);
+            }
         }
 
         return hash;
     }
 
-    protected void getHash0()
+    protected void getHash0() throws CollectionException
     {
         fillContent();
         setHash(CollectUtil.hash(getContent()));
     }
 
-    protected void fillContent0()
+    protected void fillContent0() throws CollectionException
     {
     }
 }

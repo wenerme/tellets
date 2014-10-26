@@ -7,16 +7,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import java.io.IOException;
 import java.util.List;
 
 public class GitHubHelper
 {
     private static final Gson gson = new Gson();
-    private final URLFetcher fetcher;
+    private final Fetcher fetcher;
     private final JsonParser parser = new JsonParser();
 
 
-    public GitHubHelper(URLFetcher fetcher) {this.fetcher = fetcher;}
+    public GitHubHelper(Fetcher fetcher) {this.fetcher = fetcher;}
 
     public BlobObject fetchBlobNode(TreeNode node) throws GitHubException
     {
@@ -67,12 +68,18 @@ public class GitHubHelper
                 .getAsString();
     }
 
-    public String fetchUrl(String url)
+    public String fetchUrl(String url) throws GitHubException
     {
-        return fetcher.fetch(url);
+        try
+        {
+            return fetcher.fetch(url);
+        } catch (IOException e)
+        {
+            throw new GitHubException(e);
+        }
     }
 
-    public <T extends BaseObject> T fetchAsObject(String url, Class<T> type) throws GitHubException
+    private <T extends BaseObject> T fetchAsObject(String url, Class<T> type) throws GitHubException
     {
         T o = gson.fromJson(fetchUrl(url), type);
         o.checkError();
