@@ -4,3 +4,11 @@ author:
 site:
 	url: http://wener.me
 	title: One world, one wener. One wener, one dream.
+sources:
+  - github:wenerme/wener
+  - github:wenerme/asp.net.SaySay/README.md
+  - github:wenerme/greedy_snake/README.md
+  - github:wenerme/java.blog/README.md
+  - github:wenerme/tellets/README.md
+  - github:wenerme/GTetris/README.md
+  - github:wenerme/winform.DropShadow/README.md
