@@ -8,9 +8,9 @@ import me.wener.telletsj.collect.SourceContent;
  */
 public interface ProcessService
 {
-    Article process(SourceContent content) throws ProcessException;
+    MetaData process(String content) throws ProcessException;
 
-    void register(ArticleProcessor processor);
+    void register(MetaProcessor processor);
 
-    void register(Class<? extends ArticleProcessor> clazz);
+    void register(Class<? extends MetaProcessor> clazz);
 }

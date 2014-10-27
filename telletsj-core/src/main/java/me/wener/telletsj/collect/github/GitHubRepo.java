@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import lombok.Data;
 
@@ -17,19 +18,24 @@ public class GitHubRepo
             "(/(?<path>.*))? # PATH 不包含前导的/\n" +
             "$";
     private static final Pattern PAT_INFO_URI = Pattern.compile(REG_INFO_URI, Pattern.COMMENTS);
+    @Nonnull
     private final String user;
+    @Nonnull
     private final String repository;
+    @Nonnull
     private final String branch;
+    @Nonnull
     private final String path;
 
-    public GitHubRepo(String user, String repository, String branch, String path)
+    public GitHubRepo(@Nonnull String user,@Nonnull String repository, String branch, String path)
     {
         Preconditions.checkNotNull(user);
         Preconditions.checkNotNull(repository);
         this.user = user;
         this.repository = repository;
-        this.branch = branch;
-        this.path = path;
+
+        this.branch = branch == null?"master":branch;
+        this.path = Strings.nullToEmpty(path);
     }
 
     public static GitHubRepo parse(String uri)
@@ -47,13 +53,13 @@ public class GitHubRepo
     public String getBranchUrl()
     {
         String url = "https://api.github.com/repos/%s/%s/branches/%s";
-        return String.format(url, user, repository, branch == null ? "master" : branch);
+        return String.format(url, user, repository, branch);
     }
 
     @Override
     public String toString()
     {
         String str = "github:%s/%s%s%s";
-        return String.format(str, user,repository, (branch == null ? "" : ":" + branch),(path == null ? "" : "/" + path));
+        return String.format(str, user,repository, ":" + branch, "/" + path);
     }
 }

@@ -9,7 +9,7 @@ import lombok.SneakyThrows;
 
 /**
  * 收集到的内容<br>
- * 对于一些特殊的内容,可以考虑实现子类或使用 {@link SourceContent#getProperties()} 来做定制
+ * 对于一些特殊的内容,可以考虑实现子类来做定制
  */
 @Data
 public class SourceContent
@@ -17,7 +17,8 @@ public class SourceContent
     /**
      * 该源的属性
      */
-    private final Map<String, Object> properties = Maps.newConcurrentMap();
+//    private final Map<String, Object> properties = Maps.newConcurrentMap();
+
     private URI uri;
     /**
      * 文件名

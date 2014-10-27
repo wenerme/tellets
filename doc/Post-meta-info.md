@@ -5,7 +5,7 @@ Standard meta
 --------------
 
 | Meta Name | Type      | Description  |
-| ------------- |:-------------:|:-----:|
+| --------- |:---------:|:------------:|
 | title     | string    | Title of post
 | category  | string    |  Category of post
 | tag       | array     | tags of post
@@ -18,7 +18,7 @@ Generate meta
 -------------
 
 | Meta Name | Type      | Description  |
-| ------------- |:-------------:|:-----:|
+| --------- |:---------:|:------------:|
 | hash      | string    | hash of the origin content
 | ext       | string    | extension of origin file
-| track 	| string | where this post come from.Generate by some plugin.
+| track 	| string    | where this post come from.Generate by some plugin.
