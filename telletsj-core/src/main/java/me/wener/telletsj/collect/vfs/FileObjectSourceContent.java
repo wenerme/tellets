@@ -21,7 +21,7 @@ public class FileObjectSourceContent extends SourceContent
 
     @Override
     @SneakyThrows
-    protected void fillContent0()
+    protected void fillContent()
     {
         String content = CollectUtil.readString(file.getContent().getInputStream());
         setContent(content);

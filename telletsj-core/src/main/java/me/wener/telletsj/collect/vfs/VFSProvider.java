@@ -27,7 +27,7 @@ public class VFSProvider implements SourceProvider
     }
 
     @Override
-    public CollectSource get(URI uri) throws IllegalArgumentException, UnsupportedOperationException
+    public CollectSource getSource(URI uri) throws IllegalArgumentException, UnsupportedOperationException
     {
         try
         {

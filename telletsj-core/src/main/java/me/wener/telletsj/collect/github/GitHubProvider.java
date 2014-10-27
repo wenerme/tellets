@@ -28,7 +28,7 @@ public class GitHubProvider implements SourceProvider
     }
 
     @Override
-    public CollectSource get(URI uri) throws IllegalArgumentException, UnsupportedOperationException
+    public CollectSource getSource(URI uri) throws IllegalArgumentException, UnsupportedOperationException
     {
         GitHubRepo repo = GitHubRepo.parse(uri.toString());
 

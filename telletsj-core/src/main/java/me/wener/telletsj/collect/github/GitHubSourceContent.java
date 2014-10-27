@@ -19,7 +19,7 @@ public class GitHubSourceContent extends SourceContent
     }
 
     @Override
-    protected void fillContent0() throws GitHubException
+    protected void fillContent() throws GitHubException
     {
         setContent(source.getHelper().fetchBlobNode(node).getContent());
     }

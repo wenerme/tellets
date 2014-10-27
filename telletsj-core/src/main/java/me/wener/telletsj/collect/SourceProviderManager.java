@@ -9,9 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.concurrent.Immutable;
 import javax.inject.Singleton;
-import lombok.Getter;
 
 @Singleton
 public class SourceProviderManager implements SourceProvider
@@ -41,13 +39,15 @@ public class SourceProviderManager implements SourceProvider
 
 
     @Override
-    public CollectSource get(URI uri) throws IllegalArgumentException, UnsupportedOperationException
+    public CollectSource getSource(URI uri) throws IllegalArgumentException, UnsupportedOperationException
     {
-        SourceProvider provider = schemeMap.get(uri.getScheme());
+        SourceProvider provider = getSourceProvider(uri);
         Preconditions.checkArgument(provider != null,"URI scheme not supported: "+uri);
         //noinspection ConstantConditions
-        return provider.get(uri);
+        return provider.getSource(uri);
     }
+
+    public SourceProvider getSourceProvider(URI uri) {return schemeMap.get(uri.getScheme());}
 
     public List<SourceProvider> getProviders()
     {

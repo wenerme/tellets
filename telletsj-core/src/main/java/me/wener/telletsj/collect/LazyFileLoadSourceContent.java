@@ -14,7 +14,7 @@ public class LazyFileLoadSourceContent extends SourceContent
 
     @Override
     @SneakyThrows
-    protected void fillContent0()
+    protected void fillContent()
     {
         setContent(CollectUtil.readString(file));
     }
