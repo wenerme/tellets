@@ -1,9 +1,10 @@
 package me.wener.telletsj.collect;
 
 import java.io.File;
+import java.io.IOException;
 import lombok.SneakyThrows;
 
-public class LazyFileLoadSourceContent extends SourceContent
+class LazyFileLoadSourceContent extends SourceContent
 {
     private final File file;
 
@@ -13,9 +14,14 @@ public class LazyFileLoadSourceContent extends SourceContent
     }
 
     @Override
-    @SneakyThrows
-    protected void fillContent()
+    protected void fillContent() throws CollectionException
     {
-        setContent(CollectUtil.readString(file));
+        try
+        {
+            setContent(CollectUtil.readString(file));
+        } catch (IOException e)
+        {
+            throw new CollectionException(e);
+        }
     }
 }

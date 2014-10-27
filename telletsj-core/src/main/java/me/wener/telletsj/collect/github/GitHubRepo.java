@@ -14,7 +14,8 @@ public class GitHubRepo
     private static final String REG_INFO_URI = "^(github:)? # 可选的模式前缀\n" +
             "(?<user>\\w+)/(?<repository>\\w+) # 用户名和仓库信息部分 \n" +
             "(:(?<branch>\\w+))? # 可选的分支部分\n" +
-            "(?<path>.*)?$";
+            "(/(?<path>.*))? # PATH 不包含前导的/\n" +
+            "$";
     private static final Pattern PAT_INFO_URI = Pattern.compile(REG_INFO_URI, Pattern.COMMENTS);
     private final String user;
     private final String repository;
@@ -23,6 +24,8 @@ public class GitHubRepo
 
     public GitHubRepo(String user, String repository, String branch, String path)
     {
+        Preconditions.checkNotNull(user);
+        Preconditions.checkNotNull(repository);
         this.user = user;
         this.repository = repository;
         this.branch = branch;
@@ -32,7 +35,7 @@ public class GitHubRepo
     public static GitHubRepo parse(String uri)
     {
         Matcher matcher = PAT_INFO_URI.matcher(uri);
-        Preconditions.checkArgument(matcher.find(), "Wrong GitHub repo info uri: %s", uri);
+        Preconditions.checkArgument(matcher.find(), "Wrong GitHub repo uri: %s", uri);
 
         String user = matcher.group("user");
         String repository = matcher.group("repository");
@@ -50,6 +53,7 @@ public class GitHubRepo
     @Override
     public String toString()
     {
-        return "github:" + user + "/" + repository + (branch == null ? "" : ":" + branch) + Strings.nullToEmpty(path);
+        String str = "github:%s/%s%s%s";
+        return String.format(str, user,repository, (branch == null ? "" : ":" + branch),(path == null ? "" : "/" + path));
     }
 }

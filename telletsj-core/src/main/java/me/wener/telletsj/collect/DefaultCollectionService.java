@@ -13,8 +13,9 @@ public class DefaultCollectionService implements CollectionService
 {
     private final Set<URI> sourceUris = Sets.newConcurrentHashSet();
     private final Set<CollectSource> sources = Sets.newConcurrentHashSet();
-    @Inject
-    private SourceProviderManager provider;
+    private final SourceProviderManager provider;
+
+    public DefaultCollectionService(SourceProviderManager provider) {this.provider = provider;}
 
     @Override
     public void register(SourceProvider provider)
@@ -58,7 +59,7 @@ public class DefaultCollectionService implements CollectionService
     {
         List<SourceContent> contents = Lists.newArrayList(collect(uri));
         Preconditions.checkArgument(contents.size() != 0, "Content for uri not found: " + uri);
-        Preconditions.checkArgument(contents.size() > 1, "More than one content for uri: " + uri);
+        Preconditions.checkArgument(contents.size() == 1, "More than one content for uri: " + uri);
 
         return contents.get(0);
     }

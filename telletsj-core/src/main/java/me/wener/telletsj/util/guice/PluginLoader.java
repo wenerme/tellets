@@ -63,7 +63,7 @@ public class PluginLoader<T>
         Set<Class<T>> classes = Sets.newHashSet();
         classPath = ClassPath.from(pluginType.getClassLoader());
 
-        ImmutableSet<ClassPath.ClassInfo> infos = classPath.getTopLevelClasses(packageName);
+        ImmutableSet<ClassPath.ClassInfo> infos = classPath.getTopLevelClassesRecursive(packageName);
         for (ClassPath.ClassInfo info : infos)
         {
             Class<?> clazz = info.load();

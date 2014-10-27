@@ -1,5 +1,6 @@
 package me.wener.telletsj.collect;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
@@ -21,9 +22,11 @@ public class CollectUtil
     private static final HashFunction SHA_FUNCTION = Hashing.sha1();
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
+    private static final CharMatcher SLASH_MATCHER = CharMatcher.anyOf("\\/");
+
     public static SourceContent fileToSourceContent(File file) throws IllegalArgumentException
     {
-        Preconditions.checkArgument(Files.isDirectory(file.toPath()), "File is directory " + file);
+        Preconditions.checkArgument(!Files.isDirectory(file.toPath()), "File is directory " + file);
         Preconditions.checkArgument(Files.isReadable(file.toPath()), "File unreadable " + file);
         SourceContent content = new LazyFileLoadSourceContent(file);
         content.setFilename(file.getName());
@@ -49,5 +52,10 @@ public class CollectUtil
     public static String readString(InputStream inputStream) throws IOException
     {
         return CharStreams.toString(new InputStreamReader(inputStream, DEFAULT_CHARSET));
+    }
+
+    private static String trimLeadingSlash(String str)
+    {
+        return SLASH_MATCHER.trimLeadingFrom(str);
     }
 }

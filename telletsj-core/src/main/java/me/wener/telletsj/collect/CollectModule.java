@@ -30,7 +30,6 @@ public class CollectModule extends BaseModule<CollectModule>
                 .toInstance(fsm);
         // 初始化 Provider
         SourceProviderManager provider = new SourceProviderManager();
-        bind(SourceProvider.class).toInstance(provider);
 
         // 包扫描所有已经实现的Provider
         ImmutableSet<Class<SourceProvider>> plugins = new PluginLoader<>(SourceProvider.class, Reflection
@@ -44,8 +43,8 @@ public class CollectModule extends BaseModule<CollectModule>
             provider.addProvider(instance);
         }
 
-        // 初始 Service
-        DefaultCollectionService service = new DefaultCollectionService();
+        // 绑定 Service
+        DefaultCollectionService service = new DefaultCollectionService(provider);
         bind(CollectionService.class).toInstance(service);
     }
 }
