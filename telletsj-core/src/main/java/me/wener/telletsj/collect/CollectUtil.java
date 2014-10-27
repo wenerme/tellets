@@ -18,7 +18,7 @@ import java.nio.file.Files;
 @SuppressWarnings("unused")
 public class CollectUtil
 {
-    public static final HashFunction HASH_FUNCTION = Hashing.sha1();
+    private static final HashFunction SHA_FUNCTION = Hashing.sha1();
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
     public static SourceContent fileToSourceContent(File file) throws IllegalArgumentException
@@ -30,14 +30,14 @@ public class CollectUtil
         return content;
     }
 
-    public static String hash(String content)
+    public static String sha(String content)
     {
-        return HASH_FUNCTION.hashString(content, DEFAULT_CHARSET).toString();
+        return SHA_FUNCTION.hashString(content, DEFAULT_CHARSET).toString();
     }
 
-    public static String hash(File file) throws IOException
+    public static String sha(File file) throws IOException
     {
-        return com.google.common.io.Files.hash(file, HASH_FUNCTION).toString();
+        return com.google.common.io.Files.hash(file, SHA_FUNCTION).toString();
     }
 
 

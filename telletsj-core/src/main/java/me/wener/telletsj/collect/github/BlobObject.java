@@ -15,8 +15,12 @@ class BlobObject extends BaseObject
     private String url;
     private String encoding;
     private Integer size;
-    private transient String rawContent = null;
+    private transient String realContent = null;
 
+    public String getRawContent()
+    {
+        return content;
+    }
     public String getContent()
     {
         return getContent(StandardCharsets.UTF_8);
@@ -24,17 +28,17 @@ class BlobObject extends BaseObject
 
     public String getContent(Charset charset)
     {
-        if (rawContent != null)
-            return rawContent;
+        if (realContent != null)
+            return realContent;
 
         if ("base64".equals(encoding))
         {
             byte[] bytes = DatatypeConverter.parseBase64Binary(content);
-            rawContent = new String(bytes, charset);
+            realContent = new String(bytes, charset);
         } else
-            rawContent = content;
+            realContent = content;
 
-        return rawContent;
+        return realContent;
     }
 
 }

@@ -5,4 +5,7 @@ package me.wener.telletsj.collect;
  */
 public interface CollectionService
 {
+    void register(SourceProvider provider);
+
+    Iterable<SourceContent> collect() throws CollectionException;
 }

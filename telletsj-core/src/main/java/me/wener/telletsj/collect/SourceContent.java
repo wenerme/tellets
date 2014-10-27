@@ -4,6 +4,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import lombok.Data;
+import lombok.SneakyThrows;
 
 /**
  * 收集到的内容<br>
@@ -28,38 +29,39 @@ public class SourceContent
     /**
      * 内容Hash值
      */
-    private String hash;
+    private String sha;
 
     /**
      * 填充内容,在有些情况下内容可以考虑延迟获取
      */
-    public final void fillContent() throws CollectionException
+    @SneakyThrows
+    public final String getContent()
     {
         if (content == null)
             fillContent0();
+        return content;
     }
 
-    public final String getHash()
+    public final String getSha()
     {
         // 延迟 hash
-        if (hash == null)
+        if (sha == null)
         {
             try
             {
-                getHash0();
+                getSha0();
             } catch (CollectionException e)
             {
                 Throwables.propagate(e);
             }
         }
 
-        return hash;
+        return sha;
     }
 
-    protected void getHash0() throws CollectionException
+    protected void getSha0() throws CollectionException
     {
-        fillContent();
-        setHash(CollectUtil.hash(getContent()));
+        this.setSha(CollectUtil.sha(getContent()));
     }
 
     protected void fillContent0() throws CollectionException

@@ -14,7 +14,7 @@ public class GitHubSourceContent extends SourceContent
         this.source = source;
         this.node = node;
         Preconditions.checkArgument(node.getType() == TreeNode.TreeNodeType.blob);
-        setHash(node.getSha());
+        setSha(node.getSha());
         setFilename(new File(node.getPath()).getName());
     }
 
