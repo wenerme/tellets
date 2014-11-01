@@ -2,9 +2,9 @@ package me.wener.telletsj.collect.vfs;
 
 import com.google.common.collect.Lists;
 import java.util.List;
-import me.wener.telletsj.collect.AbstractCollectSource;
 import me.wener.telletsj.collect.CollectionException;
-import me.wener.telletsj.collect.SourceContent;
+import me.wener.telletsj.collect.impl.AbstractCollectSource;
+import me.wener.telletsj.collect.impl.SourceContent;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileType;

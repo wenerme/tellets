@@ -1,7 +1,7 @@
-package me.wener.telletsj.collect;
+package me.wener.telletsj.collect.impl;
 
-import com.google.common.base.Preconditions;
-import lombok.Getter;
+import me.wener.telletsj.collect.CollectSource;
+import me.wener.telletsj.collect.CollectionException;
 
 public abstract class AbstractCollectSource implements CollectSource
 {

@@ -1,8 +1,9 @@
-package me.wener.telletsj.collect;
+package me.wener.telletsj.collect.impl;
 
 import com.google.common.base.Throwables;
 import java.net.URI;
 import lombok.Data;
+import me.wener.telletsj.collect.CollectionException;
 import me.wener.telletsj.util.IO;
 
 /**

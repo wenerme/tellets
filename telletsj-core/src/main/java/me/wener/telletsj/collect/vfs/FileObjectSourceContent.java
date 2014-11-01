@@ -2,7 +2,7 @@ package me.wener.telletsj.collect.vfs;
 
 import com.google.common.base.Preconditions;
 import lombok.SneakyThrows;
-import me.wener.telletsj.collect.SourceContent;
+import me.wener.telletsj.collect.impl.SourceContent;
 import me.wener.telletsj.util.IO;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;

@@ -1,4 +1,4 @@
-package me.wener.telletsj.collect;
+package me.wener.telletsj.collect.impl;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
@@ -7,7 +7,10 @@ import com.google.common.collect.Sets;
 import java.net.URI;
 import java.util.List;
 import java.util.Set;
-import javax.inject.Inject;
+import me.wener.telletsj.collect.CollectSource;
+import me.wener.telletsj.collect.CollectionException;
+import me.wener.telletsj.collect.CollectionService;
+import me.wener.telletsj.collect.SourceProvider;
 
 public class DefaultCollectionService implements CollectionService
 {

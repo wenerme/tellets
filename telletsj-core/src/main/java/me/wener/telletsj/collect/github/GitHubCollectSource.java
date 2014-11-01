@@ -3,9 +3,9 @@ package me.wener.telletsj.collect.github;
 import com.google.common.collect.Lists;
 import java.util.List;
 import lombok.Getter;
-import me.wener.telletsj.collect.AbstractCollectSource;
 import me.wener.telletsj.collect.CollectionException;
-import me.wener.telletsj.collect.SourceContent;
+import me.wener.telletsj.collect.impl.AbstractCollectSource;
+import me.wener.telletsj.collect.impl.SourceContent;
 
 public class GitHubCollectSource extends AbstractCollectSource
 {

@@ -1,10 +1,11 @@
-package me.wener.telletsj.collect;
+package me.wener.telletsj.collect.impl;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
+import me.wener.telletsj.collect.CollectUtil;
 
 /**
  * 目录数据源

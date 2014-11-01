@@ -2,6 +2,7 @@ package me.wener.telletsj.collect;
 
 import java.io.File;
 import java.io.IOException;
+import me.wener.telletsj.collect.impl.SourceContent;
 import me.wener.telletsj.util.IO;
 
 class LazyFileLoadSourceContent extends SourceContent

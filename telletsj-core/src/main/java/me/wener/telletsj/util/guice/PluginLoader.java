@@ -1,14 +1,11 @@
 package me.wener.telletsj.util.guice;
 
-import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.Reflection;
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.util.Collection;
-import java.util.ServiceLoader;
 import java.util.Set;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

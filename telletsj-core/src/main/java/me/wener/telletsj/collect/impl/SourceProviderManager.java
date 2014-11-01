@@ -1,4 +1,4 @@
-package me.wener.telletsj.collect;
+package me.wener.telletsj.collect.impl;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.inject.Singleton;
+import me.wener.telletsj.collect.CollectSource;
+import me.wener.telletsj.collect.SourceProvider;
 
 @Singleton
 public class SourceProviderManager implements SourceProvider
@@ -42,7 +44,7 @@ public class SourceProviderManager implements SourceProvider
     public CollectSource getSource(URI uri) throws IllegalArgumentException, UnsupportedOperationException
     {
         SourceProvider provider = getSourceProvider(uri);
-        Preconditions.checkArgument(provider != null,"URI scheme not supported: "+uri);
+        Preconditions.checkArgument(provider != null, "URI scheme not supported: " + uri);
         //noinspection ConstantConditions
         return provider.getSource(uri);
     }

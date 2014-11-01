@@ -2,16 +2,9 @@ package me.wener.telletsj.collect;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
-import com.google.common.io.CharStreams;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import me.wener.telletsj.collect.impl.SourceContent;
 
 /**
  * 搜集数据时的辅助操作类

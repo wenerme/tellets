@@ -1,6 +1,5 @@
 package me.wener.telletsj.util.guice;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import java.lang.annotation.Annotation;
 import javax.annotation.Nullable;
@@ -22,6 +21,7 @@ public class ClassFilter
             }
         };
     }
+
     public static Predicate<Class<?>> instanceOf(final Class<?> type)
     {
         return new Predicate<Class<?>>()

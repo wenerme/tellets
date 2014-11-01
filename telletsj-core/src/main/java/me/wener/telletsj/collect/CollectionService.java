@@ -1,6 +1,7 @@
 package me.wener.telletsj.collect;
 
 import java.net.URI;
+import me.wener.telletsj.collect.impl.SourceContent;
 
 /**
  * 收集服务接口

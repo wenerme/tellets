@@ -9,8 +9,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true, fluent = true)
 public class AliasLabel<T>
 {
-    private String raw;
     private final List<String> aliases = Lists.newArrayList();
+    private String raw;
 
     /**
      * @param more 添加的别名
@@ -20,6 +20,6 @@ public class AliasLabel<T>
     public T alias(String more)
     {
         aliases.add(more);
-        return (T)this;
+        return (T) this;
     }
 }

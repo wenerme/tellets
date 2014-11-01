@@ -2,7 +2,7 @@ package me.wener.telletsj.collect.github;
 
 import com.google.common.base.Preconditions;
 import java.io.File;
-import me.wener.telletsj.collect.SourceContent;
+import me.wener.telletsj.collect.impl.SourceContent;
 
 public class GitHubSourceContent extends SourceContent
 {

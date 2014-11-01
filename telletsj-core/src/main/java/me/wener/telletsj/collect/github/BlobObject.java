@@ -21,6 +21,7 @@ class BlobObject extends BaseObject
     {
         return content;
     }
+
     public String getContent()
     {
         return getContent(StandardCharsets.UTF_8);

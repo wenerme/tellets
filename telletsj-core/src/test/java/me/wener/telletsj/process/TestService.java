@@ -5,10 +5,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import me.wener.telletsj.BaseTest;
-import me.wener.telletsj.collect.CollectModule;
-import me.wener.telletsj.collect.CollectionService;
-import me.wener.telletsj.collect.SourceProviderManager;
-import me.wener.telletsj.process.processor.XMLCommentMetaProcessor;
 import org.junit.Before;
 import org.junit.Test;
 

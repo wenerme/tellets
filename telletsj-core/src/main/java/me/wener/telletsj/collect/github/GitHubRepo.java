@@ -27,14 +27,14 @@ public class GitHubRepo
     @Nonnull
     private final String path;
 
-    public GitHubRepo(@Nonnull String user,@Nonnull String repository, String branch, String path)
+    public GitHubRepo(@Nonnull String user, @Nonnull String repository, String branch, String path)
     {
         Preconditions.checkNotNull(user);
         Preconditions.checkNotNull(repository);
         this.user = user;
         this.repository = repository;
 
-        this.branch = branch == null?"master":branch;
+        this.branch = branch == null ? "master" : branch;
         this.path = Strings.nullToEmpty(path);
     }
 
@@ -60,6 +60,6 @@ public class GitHubRepo
     public String toString()
     {
         String str = "github:%s/%s%s%s";
-        return String.format(str, user,repository, ":" + branch, "/" + path);
+        return String.format(str, user, repository, ":" + branch, "/" + path);
     }
 }

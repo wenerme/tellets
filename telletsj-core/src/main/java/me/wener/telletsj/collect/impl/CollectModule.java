@@ -4,13 +4,15 @@
  * Date: 2014/10/27
  * Time: 1:33
  */
-package me.wener.telletsj.collect;
+package me.wener.telletsj.collect.impl;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.reflect.Reflection;
 import javax.inject.Named;
 import lombok.SneakyThrows;
+import me.wener.telletsj.collect.CollectionService;
+import me.wener.telletsj.collect.SourceProvider;
 import me.wener.telletsj.util.guice.BaseModule;
 import me.wener.telletsj.util.guice.ClassFilter;
 import me.wener.telletsj.util.guice.PluginLoader;

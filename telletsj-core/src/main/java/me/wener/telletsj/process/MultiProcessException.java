@@ -8,13 +8,14 @@ public class MultiProcessException extends ProcessException
 {
     @Getter
     protected final List<ProcessException> exceptions = Lists.newArrayList();
+
     @Override
     public void printStackTrace()
     {
         super.printStackTrace();
         for (ProcessException exception : exceptions)
         {
-            System.out.println("WITH EXTRA EXCEPTION: "+exception.getMessage());
+            System.out.println("WITH EXTRA EXCEPTION: " + exception.getMessage());
         }
     }
 

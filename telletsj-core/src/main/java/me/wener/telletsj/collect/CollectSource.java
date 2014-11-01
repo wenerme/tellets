@@ -1,5 +1,7 @@
 package me.wener.telletsj.collect;
 
+import me.wener.telletsj.collect.impl.SourceContent;
+
 /**
  * 收集数据源
  * 代表一个文章数据源收集点,例如 GitHub, Git, FTP
