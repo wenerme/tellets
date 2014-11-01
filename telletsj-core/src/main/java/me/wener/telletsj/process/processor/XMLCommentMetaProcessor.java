@@ -1,9 +1,13 @@
-package me.wener.telletsj.process;
+package me.wener.telletsj.process.processor;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import me.wener.telletsj.process.ContentInfo;
+import me.wener.telletsj.process.NoMetaException;
+import me.wener.telletsj.process.ProcessException;
+import me.wener.telletsj.process.ProcessUtil;
 
-public class XMLCommentMetaProcessor implements MetaProcessor
+public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
 {
     private final static XMLCommentMetaProcessor INSTANCE = new XMLCommentMetaProcessor();
 
@@ -14,6 +18,10 @@ public class XMLCommentMetaProcessor implements MetaProcessor
     private final static Pattern ALL_META =
             Pattern.compile("(" + SINGLE_META.pattern() + ")+", Pattern.MULTILINE);
 
+    public XMLCommentMetaProcessor()
+    {
+        super("markdown|md|mdown|mkd|mkdn|mdwn|mdtxt|mdtext".split("|"));
+    }
 
     public static XMLCommentMetaProcessor getInstance()
     {

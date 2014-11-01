@@ -1,11 +1,12 @@
-package me.wener.telletsj.core;
+package me.wener.telletsj.process;
 
 import me.wener.telletsj.util.guice.BaseModule;
 
-public class TelletsJModule extends BaseModule<TelletsJModule>
+public class ProcessModule extends BaseModule<ProcessModule>
 {
     @Override
     protected void configure()
     {
+
     }
 }

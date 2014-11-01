@@ -4,6 +4,7 @@ import com.google.common.base.Splitter;
 import java.util.List;
 import java.util.Map;
 import me.wener.telletsj.BaseTest;
+import me.wener.telletsj.process.processor.XMLCommentMetaProcessor;
 import org.junit.Test;
 
 public class XMLCommentsTest extends BaseTest
