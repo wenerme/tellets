@@ -43,8 +43,4 @@ public class Article
      */
     private String state;
 
-    public enum ArticleState
-    {
-        PUBLISH, DRAFT
-    }
 }
