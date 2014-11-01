@@ -2,5 +2,5 @@ package me.wener.telletsj.process;
 
 public interface MetaProcessor
 {
-    MetaData process(String content) throws ProcessException;
+    ContentInfo process(String content) throws ProcessException;
 }

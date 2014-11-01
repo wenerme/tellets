@@ -1,11 +1,9 @@
 package me.wener.telletsj.collect;
 
 import com.google.common.base.Throwables;
-import com.google.common.collect.Maps;
 import java.net.URI;
-import java.util.Map;
 import lombok.Data;
-import lombok.SneakyThrows;
+import me.wener.telletsj.util.IO;
 
 /**
  * 收集到的内容<br>
@@ -65,7 +63,7 @@ public class SourceContent
 
     protected void getSha0() throws CollectionException
     {
-        this.setSha(CollectUtil.sha(getContent()));
+        this.setSha(IO.sha(getContent()));
     }
 
     protected void fillContent() throws CollectionException

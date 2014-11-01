@@ -2,7 +2,7 @@ package me.wener.telletsj.collect;
 
 import java.io.File;
 import java.io.IOException;
-import lombok.SneakyThrows;
+import me.wener.telletsj.util.IO;
 
 class LazyFileLoadSourceContent extends SourceContent
 {
@@ -18,7 +18,7 @@ class LazyFileLoadSourceContent extends SourceContent
     {
         try
         {
-            setContent(CollectUtil.readString(file));
+            setContent(IO.readString(file));
         } catch (IOException e)
         {
             throw new CollectionException(e);

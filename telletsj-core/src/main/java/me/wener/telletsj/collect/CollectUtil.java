@@ -19,8 +19,6 @@ import java.nio.file.Files;
 @SuppressWarnings("unused")
 public class CollectUtil
 {
-    private static final HashFunction SHA_FUNCTION = Hashing.sha1();
-    private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
     private static final CharMatcher SLASH_MATCHER = CharMatcher.anyOf("\\/");
 
@@ -31,27 +29,6 @@ public class CollectUtil
         SourceContent content = new LazyFileLoadSourceContent(file);
         content.setFilename(file.getName());
         return content;
-    }
-
-    public static String sha(String content)
-    {
-        return SHA_FUNCTION.hashString(content, DEFAULT_CHARSET).toString();
-    }
-
-    public static String sha(File file) throws IOException
-    {
-        return com.google.common.io.Files.hash(file, SHA_FUNCTION).toString();
-    }
-
-
-    public static String readString(File file) throws IOException
-    {
-        return new String(Files.readAllBytes(file.toPath()), DEFAULT_CHARSET);
-    }
-
-    public static String readString(InputStream inputStream) throws IOException
-    {
-        return CharStreams.toString(new InputStreamReader(inputStream, DEFAULT_CHARSET));
     }
 
     private static String trimLeadingSlash(String str)
