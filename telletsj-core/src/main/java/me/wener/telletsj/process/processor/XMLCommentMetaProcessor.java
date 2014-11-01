@@ -1,12 +1,16 @@
 package me.wener.telletsj.process.processor;
 
+import com.google.inject.Singleton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.inject.Named;
 import me.wener.telletsj.process.ContentInfo;
 import me.wener.telletsj.process.NoMetaException;
 import me.wener.telletsj.process.ProcessException;
 import me.wener.telletsj.process.ProcessUtil;
 
+@Named
+@Singleton
 public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
 {
     private final static XMLCommentMetaProcessor INSTANCE = new XMLCommentMetaProcessor();
@@ -20,12 +24,7 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
 
     public XMLCommentMetaProcessor()
     {
-        super("markdown|md|mdown|mkd|mkdn|mdwn|mdtxt|mdtext".split("|"));
-    }
-
-    public static XMLCommentMetaProcessor getInstance()
-    {
-        return INSTANCE;
+        super("markdown|md|mdown|mkd|mkdn|mdwn|mdtxt|mdtext".split("\\|"));
     }
 
     @Override

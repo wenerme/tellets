@@ -9,12 +9,8 @@ import org.junit.Test;
 
 public class XMLCommentsTest extends BaseTest
 {
-    @Test
-    public void test() throws ProcessException
+    public static void assertSimplePost(ContentInfo info)
     {
-        String content = getContent("res:me/wener/telletsj/process/SimplePost.md");
-        XMLCommentMetaProcessor processor = new XMLCommentMetaProcessor();
-        ContentInfo info = processor.process(content);
         Map<String, String> meta = info.meta();
 
         assert meta.get("title").equals("simple post, simple article");
@@ -28,5 +24,15 @@ public class XMLCommentsTest extends BaseTest
 
         assert info.sectionOne("more").equals("description here");
         assert info.restContent().equals("detail here");
+    }
+
+    @Test
+    public void test() throws ProcessException
+    {
+        String content = getContent("res:me/wener/telletsj/process/SimplePost.md");
+        XMLCommentMetaProcessor processor = new XMLCommentMetaProcessor();
+        ContentInfo info = processor.process(content);
+
+        assertSimplePost(info);
     }
 }

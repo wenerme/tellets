@@ -38,9 +38,7 @@ public class CollectModule extends BaseModule<CollectModule>
 
         for (Class<SourceProvider> clazz : Iterables.filter(plugins, ClassFilter.annotatedBy(Named.class)))
         {
-            SourceProvider instance = clazz.newInstance();
-            requestInjection(instance);
-            provider.addProvider(instance);
+            provider.addProvider(instance(clazz));
         }
 
         // 绑定 Service

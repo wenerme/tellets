@@ -46,12 +46,12 @@ public class PluginLoader<T>
     /**
      * 获取一个 {@code pluginType} 类型,包为该类型所在包的插件加载器
      */
-    public static <PT> PluginLoader<? extends PT> of(Class<PT> pluginType)
+    public static <PT> PluginLoader<PT> of(Class<PT> pluginType)
     {
         return of(pluginType, Reflection.getPackageName(pluginType));
     }
 
-    public static <PT> PluginLoader<? extends PT> of(Class<PT> pluginType, String packageName)
+    public static <PT> PluginLoader<PT> of(Class<PT> pluginType, String packageName)
     {
         return new PluginLoader<>(pluginType, packageName);
     }
@@ -63,7 +63,8 @@ public class PluginLoader<T>
         Set<Class<T>> classes = Sets.newHashSet();
         classPath = ClassPath.from(pluginType.getClassLoader());
 
-        ImmutableSet<ClassPath.ClassInfo> infos = classPath.getTopLevelClassesRecursive(packageName);
+        ImmutableSet<ClassPath.ClassInfo> infos;
+        infos = classPath.getTopLevelClassesRecursive(packageName);
         for (ClassPath.ClassInfo info : infos)
         {
             Class<?> clazz = info.load();
