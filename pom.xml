@@ -54,7 +54,7 @@
         <ormlite-core.version>4.48</ormlite-core.version>
         <pdfbox.version>1.8.5</pdfbox.version>
         <pegdown.version>1.4.2</pegdown.version>
-        <querydsl.version>3.3.4</querydsl.version>
+        <querydsl.version>3.5.0</querydsl.version>
         <servlet-api.version>3.0.1</servlet-api.version>
         <slf4j.version>1.7.7</slf4j.version>
         <spring.version>4.0.3.RELEASE</spring.version>

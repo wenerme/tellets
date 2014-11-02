@@ -1,4 +1,4 @@
-package me.wener.telletsj.article;
+package me.wener.telletsj.data;
 
 public enum ArticleState
 {

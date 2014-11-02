@@ -1,4 +1,4 @@
-package me.wener.telletsj.article;
+package me.wener.telletsj.data;
 
 import me.wener.telletsj.util.guice.BaseModule;
 
@@ -7,6 +7,5 @@ public class ArticleModule extends BaseModule<ArticleModule>
     @Override
     protected void configure()
     {
-
     }
 }
