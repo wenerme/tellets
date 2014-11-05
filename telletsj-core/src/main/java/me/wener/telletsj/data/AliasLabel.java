@@ -15,6 +15,7 @@ public class AliasLabel<T>
 
     public AliasLabel()
     {}
+
     public AliasLabel(String raw)
     {
         this.raw = raw;

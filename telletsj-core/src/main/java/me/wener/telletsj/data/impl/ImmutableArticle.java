@@ -1,12 +1,10 @@
 package me.wener.telletsj.data.impl;
 
-import com.mysema.query.annotations.QueryEntity;
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import lombok.experimental.Builder;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleState;
@@ -16,21 +14,20 @@ import me.wener.telletsj.data.ArticleState;
  */
 @Data
 @Setter(AccessLevel.NONE)
-@QueryEntity
 @Immutable
 @Builder
 public class ImmutableArticle implements Article
 {
 
-    @NotNull
+    @Nonnull
     private final String title;
 
     private final String link;
 
-    @NotNull
+    @Nonnull
     private final String sha;
 
-    @NotNull
+    @Nonnull
     private final String content;
 
     private final String description;
@@ -38,8 +35,7 @@ public class ImmutableArticle implements Article
     private final long timestamp;
 
 
-
-    @NotNull
+    @Nonnull
     private final ArticleState state;
 
     @Override

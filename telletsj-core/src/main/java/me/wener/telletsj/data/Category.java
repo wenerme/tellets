@@ -1,6 +1,5 @@
 package me.wener.telletsj.data;
 
-import com.mysema.query.annotations.QueryEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

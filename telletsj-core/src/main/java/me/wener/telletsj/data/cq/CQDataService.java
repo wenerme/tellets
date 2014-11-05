@@ -30,7 +30,7 @@ public class CQDataService extends AbstractDataService
     public Article getArticleByLink(String link)
     {
         ResultSet<Article> resultSet = articles.retrieve(equal(CQArticle.LINK, link));
-        Preconditions.checkState(resultSet.size() == 1,"Find multi article with same link");
+        Preconditions.checkState(resultSet.size() == 1, "Find multi article with same link");
         return resultSet.uniqueResult();
     }
 }

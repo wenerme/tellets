@@ -9,6 +9,9 @@ import me.wener.telletsj.data.Category;
 
 public abstract class ArticleVO implements Article, ArticleInfo
 {
+    public List<String> tags;
+    public List<Category> categories;
+    public Map<String, String> meta;
     private String title;
     private String link;
     private String sha;
@@ -16,8 +19,4 @@ public abstract class ArticleVO implements Article, ArticleInfo
     private String description;
     private long timestamp;
     private ArticleState state;
-
-    public List<String> tags;
-    public List<Category> categories;
-    public Map<String,String> meta;
 }

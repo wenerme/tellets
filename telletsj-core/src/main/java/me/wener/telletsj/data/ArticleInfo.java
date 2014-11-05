@@ -12,12 +12,12 @@ public interface ArticleInfo extends Serializable
     String getSha();
 
     /**
-     * @return 获取标签,标签应该是有序的
+     * @return 获取标签, 标签应该是有序的
      */
     Set<String> getTags();
 
     /**
-     * @return 获取文章分类,文章分类应该是有序的
+     * @return 获取文章分类, 文章分类应该是有序的
      */
     Set<String> getCategories();
 

@@ -4,6 +4,8 @@ import com.google.common.eventbus.EventBus;
 import java.util.Collection;
 import java.util.Set;
 import me.wener.telletsj.data.Article;
+import me.wener.telletsj.data.ArticleBuilder;
+import me.wener.telletsj.data.ArticleInfo;
 import me.wener.telletsj.data.Category;
 import me.wener.telletsj.data.DataService;
 import me.wener.telletsj.data.Tag;
@@ -78,6 +80,18 @@ public class AbstractDataService implements DataService
 
     @Override
     public Collection<Article> getArticleOrderByDate(int offset, int limit)
+    {
+        return null;
+    }
+
+    @Override
+    public ArticleInfo getInfo(Article article)
+    {
+        return null;
+    }
+
+    @Override
+    public ArticleBuilder createArticleBuilder()
     {
         return null;
     }

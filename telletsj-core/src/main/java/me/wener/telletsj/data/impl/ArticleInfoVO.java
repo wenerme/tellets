@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import java.util.Map;
 import java.util.Set;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import me.wener.telletsj.data.ArticleInfo;
@@ -16,7 +15,6 @@ public class ArticleInfoVO implements ArticleInfo
     /**
      * 关联的文章SHA值
      */
-    @NotNull
     private final String sha;
     /**
      * 文章标签

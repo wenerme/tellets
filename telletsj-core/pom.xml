@@ -118,11 +118,17 @@
             <version>${jsr305.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>commons-httpclient</groupId>-->
+            <!--<artifactId>commons-httpclient</artifactId>-->
+            <!--<version>3.1</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>commons-logging</artifactId>-->
+                    <!--<groupId>commons-logging</groupId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -136,51 +142,51 @@
             <version>${gson.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.182</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.h2database</groupId>-->
+            <!--<artifactId>h2</artifactId>-->
+            <!--<version>1.4.182</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>3.4.4</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.jooq</groupId>-->
+            <!--<artifactId>jooq</artifactId>-->
+            <!--<version>3.4.4</version>-->
+        <!--</dependency>-->
 
 
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-meta</artifactId>
-            <version>3.4.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-codegen</artifactId>
-            <version>3.4.4</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.jooq</groupId>-->
+            <!--<artifactId>jooq-meta</artifactId>-->
+            <!--<version>3.4.4</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jooq</groupId>-->
+            <!--<artifactId>jooq-codegen</artifactId>-->
+            <!--<version>3.4.4</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-core</artifactId>
-            <version>${querydsl.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-sql</artifactId>
-            <version>${querydsl.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-collections</artifactId>
-            <version>${querydsl.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mysema.querydsl</groupId>
-            <artifactId>querydsl-apt</artifactId>
-            <version>${querydsl.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.mysema.querydsl</groupId>-->
+            <!--<artifactId>querydsl-core</artifactId>-->
+            <!--<version>${querydsl.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.mysema.querydsl</groupId>-->
+            <!--<artifactId>querydsl-sql</artifactId>-->
+            <!--<version>${querydsl.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.mysema.querydsl</groupId>-->
+            <!--<artifactId>querydsl-collections</artifactId>-->
+            <!--<version>${querydsl.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.mysema.querydsl</groupId>-->
+            <!--<artifactId>querydsl-apt</artifactId>-->
+            <!--<version>${querydsl.version}</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.googlecode.cqengine</groupId>

@@ -20,6 +20,7 @@ public interface DataService
      * @return 当对内容操作的时候会从该EventBus触发事件
      */
     EventBus getEventBus();
+
     /**
      * @return 所有的标签列表
      */
@@ -45,6 +46,7 @@ public interface DataService
      * @return 没有找到返回 {@code null}
      */
     Article getArticleBySha(String sha);
+
     /**
      * @param link 进行查找的 Link 值
      * @return 没有找到返回 {@code null}
@@ -57,10 +59,16 @@ public interface DataService
     Collection<Article> getArticleByCategories(Set<Category> tags, int offset, int limit);
 
     /**
-     *
-     * @param offset    偏移量,从<b>0</b>开始
-     * @param limit     数量限制,<b>-1</b>表示没有限制
+     * @param offset 偏移量,从<b>0</b>开始
+     * @param limit  数量限制,<b>-1</b>表示没有限制
      * @return 返回范围内的文章
      */
     Collection<Article> getArticleOrderByDate(int offset, int limit);
+
+    ArticleInfo getInfo(Article article);
+
+    /**
+     * @return 获取一个文章对象的Builder, 构建出来的Article应该是实现使用的Article
+     */
+    ArticleBuilder createArticleBuilder();
 }
