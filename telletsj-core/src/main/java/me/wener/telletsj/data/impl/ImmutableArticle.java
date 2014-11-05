@@ -37,6 +37,8 @@ public class ImmutableArticle implements Article
 
     private final long timestamp;
 
+
+
     @NotNull
     private final ArticleState state;
 

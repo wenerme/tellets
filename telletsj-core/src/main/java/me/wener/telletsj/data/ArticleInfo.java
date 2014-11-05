@@ -1,41 +1,35 @@
 package me.wener.telletsj.data;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
-import javax.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.experimental.Accessors;
 
-@Data
-@Accessors(chain = true)
-public class ArticleInfo
+public interface ArticleInfo extends Serializable
 {
     /**
-     * 关联的文章SHA值
+     * @return 与文章对应的 sha 值
      */
-    @NotNull
-    private final String sha;
-    /**
-     * 文章标签
-     */
-    private final Set<Tag> tags = Sets.newHashSet();
-    /**
-     * 文章分类
-     */
-    private final Set<Category> categories = Sets.newHashSet();
-    /**
-     * 在文章内容中启用的一些特性
-     */
-    private final Set<String> features = Sets.newHashSet();
-    /**
-     * 文章相关的其他元数据
-     */
-    private final Map<String, String> meta = Maps.newHashMap();
+    String getSha();
 
     /**
-     * 作者
+     * @return 获取标签,标签应该是有序的
      */
-    private String author;
+    Set<String> getTags();
+
+    /**
+     * @return 获取文章分类,文章分类应该是有序的
+     */
+    Set<String> getCategories();
+
+    /**
+     * @return 获取特性集合
+     */
+    Set<String> getFeatures();
+
+    /**
+     * @return 获取其他元数据
+     */
+    Map<String, String> getMeta();
+
+    String getAuthor();
 }

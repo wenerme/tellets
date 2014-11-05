@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-@QueryEntity
 public class Category extends AliasLabel<Tag>
 {
 }

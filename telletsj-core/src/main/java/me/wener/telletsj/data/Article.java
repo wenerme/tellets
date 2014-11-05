@@ -1,9 +1,11 @@
 package me.wener.telletsj.data;
 
+import java.io.Serializable;
+
 /**
  * 文章接口,作为一个文章该有的主要内容
  */
-public interface Article extends Identifiable
+public interface Article extends Identifiable, Serializable
 {
     /**
      * @return 与 {@link #getLink} 相同

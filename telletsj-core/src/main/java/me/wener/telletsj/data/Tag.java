@@ -10,10 +10,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@QueryEntity
 public class Tag extends AliasLabel<Tag>
 {
-
     public Tag(String raw)
     {
         super(raw);
