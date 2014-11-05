@@ -4,12 +4,12 @@ package me.wener.telletsj.data.cq;
 import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
 import com.googlecode.cqengine.attribute.SimpleNullableAttribute;
+import com.googlecode.cqengine.query.option.AttributeOrder;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleState;
 
-public class CQArticle
+class CQArticle
 {
-
     public static final Attribute<Article, String> TITLE = new SimpleAttribute<Article, String>("TITLE")
     {
         public String getValue(Article Article) { return Article.getTitle(); }
@@ -45,4 +45,7 @@ public class CQArticle
     {
         public ArticleState getValue(Article Article) { return Article.getState(); }
     };
+
+    public static final AttributeOrder<Article> byTimestampDesc = new AttributeOrder<Article>(TIMESTAMP, true);
+    public static final AttributeOrder<Article> byTimestampAsc = new AttributeOrder<Article>(TIMESTAMP, false);
 }

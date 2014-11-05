@@ -7,6 +7,8 @@ import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import me.wener.telletsj.data.ArticleInfo;
+import me.wener.telletsj.data.Category;
+import me.wener.telletsj.data.Tag;
 
 @Data
 @Accessors(chain = true)
@@ -19,22 +21,22 @@ public class ArticleInfoVO implements ArticleInfo
     /**
      * 文章标签
      */
-    private final Set<String> tags = Sets.newHashSet();
+    private final Set<Tag> tags = Sets.newLinkedHashSet();
     /**
      * 文章分类
      */
-    private final Set<String> categories = Sets.newHashSet();
+    private final Set<Category> categories = Sets.newLinkedHashSet();
     /**
      * 在文章内容中启用的一些特性
      */
-    private final Set<String> features = Sets.newHashSet();
+    private final Set<String> features = Sets.newLinkedHashSet();
     /**
      * 文章相关的其他元数据
      */
     private final Map<String, String> meta = Maps.newHashMap();
 
-    /**
-     * 作者
-     */
-    private String author;
+    public ArticleInfoVO(String sha)
+    {
+        this.sha = sha;
+    }
 }

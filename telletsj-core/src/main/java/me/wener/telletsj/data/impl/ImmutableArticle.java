@@ -32,15 +32,9 @@ public class ImmutableArticle implements Article
 
     private final String description;
 
-    private final long timestamp;
+    private final Long timestamp;
 
 
     @Nonnull
     private final ArticleState state;
-
-    @Override
-    public String getId()
-    {
-        return link;
-    }
 }

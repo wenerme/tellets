@@ -3,8 +3,8 @@ package me.wener.telletsj.data.impl;
 import com.google.common.eventbus.EventBus;
 import java.util.Collection;
 import java.util.Set;
+import javax.annotation.Nonnull;
 import me.wener.telletsj.data.Article;
-import me.wener.telletsj.data.ArticleBuilder;
 import me.wener.telletsj.data.ArticleInfo;
 import me.wener.telletsj.data.Category;
 import me.wener.telletsj.data.DataService;
@@ -13,7 +13,7 @@ import me.wener.telletsj.data.Tag;
 public class AbstractDataService implements DataService
 {
     @Override
-    public Article store(Article article)
+    public Article store(@Nonnull Article article,@Nonnull ArticleInfo info)
     {
         return null;
     }
@@ -78,20 +78,21 @@ public class AbstractDataService implements DataService
         return null;
     }
 
-    @Override
-    public Collection<Article> getArticleOrderByDate(int offset, int limit)
-    {
-        return null;
-    }
 
     @Override
-    public ArticleInfo getInfo(Article article)
+    public @Nonnull ArticleInfo getArticleInfo(@Nonnull Article article)
     {
         return null;
     }
 
     @Override
     public ArticleBuilder createArticleBuilder()
+    {
+        return null;
+    }
+
+    @Override
+    public Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
     {
         return null;
     }
