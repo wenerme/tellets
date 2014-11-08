@@ -4,8 +4,6 @@ import static com.google.common.base.Preconditions.*;
 import static com.googlecode.cqengine.query.QueryFactory.*;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.googlecode.cqengine.CQEngine;
@@ -20,10 +18,11 @@ import com.googlecode.cqengine.query.option.AttributeOrder;
 import com.googlecode.cqengine.query.simple.SimpleQuery;
 import com.googlecode.cqengine.resultset.ResultSet;
 import java.util.Iterator;
-import java.util.List;
 import javax.annotation.Nonnull;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleInfo;
+import me.wener.telletsj.data.Category;
+import me.wener.telletsj.data.Tag;
 import me.wener.telletsj.data.impl.AbstractDataService;
 import me.wener.telletsj.data.impl.ArticleBuilder;
 
@@ -39,6 +38,9 @@ public class CQDataService extends AbstractDataService
         articles.addIndex(SuffixTreeIndex.onAttribute(CQArticle.CONTENT));
         articles.addIndex(HashIndex.onAttribute(CQArticle.LINK));
         articles.addIndex(NavigableIndex.onAttribute(CQArticle.TIMESTAMP));
+
+        IndexedCollection<Tag> tags = CQEngine.newInstance();
+        IndexedCollection<Category> categories = CQEngine.newInstance();
     }
 
     @Override
@@ -109,6 +111,7 @@ public class CQDataService extends AbstractDataService
         return (ArticleVO) a;
     }
 
+
     @Override
     public ArticleBuilder createArticleBuilder()
     {
@@ -118,15 +121,20 @@ public class CQDataService extends AbstractDataService
     @Override
     public Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
     {
-        ResultSet<Article> rs = articles.retrieve(any(CQArticle.TIMESTAMP),queryOptions(orderBy(new AttributeOrder<>(CQArticle.TIMESTAMP, descending))));
-        Iterator<Article> iterator = rs.iterator();
+        ResultSet<Article> rs = articles
+                .retrieve(any(CQArticle.TIMESTAMP), queryOptions(orderBy(new AttributeOrder<>(CQArticle.TIMESTAMP, descending))));
+        return limit(offset, limit, rs.iterator());
+    }
+
+    private Iterable<Article> limit(int offset, int limit, Iterator<Article> iterator)
+    {
         Iterators.advance(iterator, offset);
         return Lists.newArrayList(Iterators.limit(iterator, limit));
     }
 
-    private <T,A> Query<T> any(Attribute<T, A> attribute)
+    private <T, A> Query<T> any(Attribute<T, A> attribute)
     {
-        return new SimpleQuery<T,A>(attribute)
+        return new SimpleQuery<T, A>(attribute)
         {
 
             @Override

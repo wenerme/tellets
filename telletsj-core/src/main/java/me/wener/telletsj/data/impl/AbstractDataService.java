@@ -43,6 +43,24 @@ public class AbstractDataService implements DataService
     }
 
     @Override
+    public Collection<Category> getRootCategories()
+    {
+        return null;
+    }
+
+    @Override
+    public Collection<Category> getChildrenOf(Category c)
+    {
+        return null;
+    }
+
+    @Override
+    public Collection<Category> getChildrenRecursiveOf(Category c)
+    {
+        return null;
+    }
+
+    @Override
     public Tag findTag(String name)
     {
         return null;
@@ -93,6 +111,18 @@ public class AbstractDataService implements DataService
 
     @Override
     public Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
+    {
+        return null;
+    }
+
+    @Override
+    public Tag createTag()
+    {
+        return null;
+    }
+
+    @Override
+    public Category createCategory()
     {
         return null;
     }

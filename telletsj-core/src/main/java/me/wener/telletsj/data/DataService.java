@@ -35,6 +35,12 @@ public interface DataService
      */
     Collection<Category> getCategories();
 
+    Collection<Category> getRootCategories();
+
+    Collection<Category> getChildrenOf(Category c);
+
+    Collection<Category> getChildrenRecursiveOf(Category c);
+
     /**
      * @return 查找标签, 没有找到返回 {@code null}
      */
@@ -80,4 +86,8 @@ public interface DataService
      * @return 返回范围内的文章
      */
     Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending);
+
+    Tag createTag();
+
+    Category createCategory();
 }
