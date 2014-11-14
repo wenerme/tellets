@@ -38,11 +38,13 @@ class ArticleVO implements Article, ArticleInfo
         timestamp = a.getTimestamp();
         state = a.getState();
     }
+
     public ArticleVO(Article a, ArticleInfo i)
     {
         this(a);
         addInfo(i);
     }
+
     public void clearInfo()
     {
         tags.clear();

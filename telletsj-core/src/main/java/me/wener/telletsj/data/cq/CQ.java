@@ -4,9 +4,6 @@ import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
 import com.googlecode.cqengine.query.Query;
 import com.googlecode.cqengine.query.simple.SimpleQuery;
-import java.util.Set;
-import me.wener.telletsj.data.ArticleInfo;
-import me.wener.telletsj.data.Tag;
 
 public class CQ
 {

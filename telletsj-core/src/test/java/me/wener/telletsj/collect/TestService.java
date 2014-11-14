@@ -19,6 +19,7 @@ public class TestService
     private CollectionService service;
     @Inject
     private SourceProviderManager manager;
+
     @Before
     public void setup()
     {

@@ -41,6 +41,7 @@ public class TestObject
                 .getAsString()
                 .equals("https://api.github.com/repos/wenerme/wener/git/trees/7ae3e3d3096737440276049792219659159a839e");
     }
+
     @Test
     public void testBlob() throws IOException
     {
@@ -50,6 +51,7 @@ public class TestObject
         assert blob.getContent().contains("Blog");
         System.out.println(blob.getContent());
     }
+
     @Test
     @Ignore
     public void testFetch() throws IOException, GitHubException

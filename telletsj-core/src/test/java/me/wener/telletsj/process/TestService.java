@@ -34,6 +34,7 @@ public class TestService extends BaseTest
     {
         service.tryProcess("SimplePost.md", Suppliers.ofInstance("there is no meta data"));
     }
+
     @Test
     public void testCanNotProcess() throws ProcessException
     {

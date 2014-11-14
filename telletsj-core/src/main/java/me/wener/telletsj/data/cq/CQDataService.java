@@ -119,7 +119,8 @@ public class CQDataService extends AbstractDataService
     public Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
     {
         ResultSet<Article> rs = articles
-                .retrieve(CQ.any(CQArticle.TIMESTAMP), queryOptions(orderBy(new AttributeOrder<>(CQArticle.TIMESTAMP, descending))));
+                .retrieve(CQ
+                        .any(CQArticle.TIMESTAMP), queryOptions(orderBy(new AttributeOrder<>(CQArticle.TIMESTAMP, descending))));
         return limit(offset, limit, rs.iterator());
     }
 

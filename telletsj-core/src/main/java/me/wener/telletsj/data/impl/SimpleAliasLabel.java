@@ -1,12 +1,11 @@
 package me.wener.telletsj.data.impl;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import java.util.List;
 import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import me.wener.telletsj.data.AliasLabel;
+
 @Data
 @Accessors
 public class SimpleAliasLabel<T> implements AliasLabel<T>
@@ -36,6 +35,6 @@ public class SimpleAliasLabel<T> implements AliasLabel<T>
     public T setName(String name)
     {
         this.name = name;
-        return (T)this;
+        return (T) this;
     }
 }

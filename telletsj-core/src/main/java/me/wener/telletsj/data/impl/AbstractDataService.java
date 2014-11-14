@@ -13,7 +13,7 @@ import me.wener.telletsj.data.Tag;
 public class AbstractDataService implements DataService
 {
     @Override
-    public Article store(@Nonnull Article article,@Nonnull ArticleInfo info)
+    public Article store(@Nonnull Article article, @Nonnull ArticleInfo info)
     {
         return null;
     }
@@ -98,7 +98,9 @@ public class AbstractDataService implements DataService
 
 
     @Override
-    public @Nonnull ArticleInfo getArticleInfo(@Nonnull Article article)
+    public
+    @Nonnull
+    ArticleInfo getArticleInfo(@Nonnull Article article)
     {
         return null;
     }

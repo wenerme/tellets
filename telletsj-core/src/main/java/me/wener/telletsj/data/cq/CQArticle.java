@@ -40,12 +40,10 @@ class CQArticle
     {
         public Long getValue(Article Article) { return Article.getTimestamp(); }
     };
-
+    public static final AttributeOrder<Article> byTimestampDesc = new AttributeOrder<Article>(TIMESTAMP, true);
+    public static final AttributeOrder<Article> byTimestampAsc = new AttributeOrder<Article>(TIMESTAMP, false);
     public static final Attribute<Article, ArticleState> STATE = new SimpleAttribute<Article, ArticleState>("STATE")
     {
         public ArticleState getValue(Article Article) { return Article.getState(); }
     };
-
-    public static final AttributeOrder<Article> byTimestampDesc = new AttributeOrder<Article>(TIMESTAMP, true);
-    public static final AttributeOrder<Article> byTimestampAsc = new AttributeOrder<Article>(TIMESTAMP, false);
 }
