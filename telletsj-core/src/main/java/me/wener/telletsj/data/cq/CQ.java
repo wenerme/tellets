@@ -4,6 +4,8 @@ import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
 import com.googlecode.cqengine.query.Query;
 import com.googlecode.cqengine.query.simple.SimpleQuery;
+import java.util.Collection;
+import java.util.Collections;
 
 public class CQ
 {
@@ -27,6 +29,30 @@ public class CQ
             protected int calcHashCode()
             {
                 return 0;
+            }
+        };
+    }
+
+    public static <O, A> Query<O> disjoint(final Attribute<O, ? extends Collection<A>> attribute, final Collection<A> attributeValues)
+    {
+        return new Query<O>()
+        {
+            @Override
+            public boolean matches(O object)
+            {
+                return Collections.disjoint(attribute.getValues(object), attributeValues);
+            }
+        };
+    }
+
+    public static <O, A> Query<O> nonDisjoint(final Attribute<O, ? extends Collection<A>> attribute, final Collection<A> attributeValues)
+    {
+        return new Query<O>()
+        {
+            @Override
+            public boolean matches(O object)
+            {
+                return !Collections.disjoint(attribute.getValues(object), attributeValues);
             }
         };
     }

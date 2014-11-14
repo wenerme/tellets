@@ -50,6 +50,11 @@ public class CQTest
         assertN(a, i);
     }
 
+    public void testFindByTag()
+    {
+
+    }
+
     @Before
     public void setup()
     {
@@ -67,6 +72,7 @@ public class CQTest
                     .timestamp((long) i)
                     .build();
             service.store(article, service.getArticleInfo(article));
+
         }
     }
 

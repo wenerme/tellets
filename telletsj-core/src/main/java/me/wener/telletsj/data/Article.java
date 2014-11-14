@@ -35,7 +35,6 @@ public interface Article extends Serializable
     /**
      * 文章描述
      */
-    @Nonnull
     String getDescription();
 
     /**

@@ -67,9 +67,9 @@ public interface DataService
     @Nullable
     Article getArticleByLink(String link);
 
-    Collection<Article> getArticleByTags(Set<Tag> tags, int offset, int limit);
+    Collection<Article> findArticleByTags(Set<Tag> tags, int offset, int limit);
 
-    Collection<Article> getArticleByCategories(Set<Category> tags, int offset, int limit);
+    Collection<Article> findArticleByCategories(Set<Category> categories, int offset, int limit);
 
     @Nonnull
     ArticleInfo getArticleInfo(@Nonnull Article article);
@@ -85,9 +85,9 @@ public interface DataService
      * @param descending 降序
      * @return 返回范围内的文章
      */
-    Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending);
+    Collection<Article> getArticleOrderByDate(int offset, int limit, boolean descending);
 
-    Tag createTag();
+    Tag findOrCreateTag();
 
-    Category createCategory();
+    Category findOrCreateCategory();
 }

@@ -85,13 +85,13 @@ public class AbstractDataService implements DataService
     }
 
     @Override
-    public Collection<Article> getArticleByTags(Set<Tag> tags, int offset, int limit)
+    public Collection<Article> findArticleByTags(Set<Tag> tags, int offset, int limit)
     {
         return null;
     }
 
     @Override
-    public Collection<Article> getArticleByCategories(Set<Category> tags, int offset, int limit)
+    public Collection<Article> findArticleByCategories(Set<Category> categories, int offset, int limit)
     {
         return null;
     }
@@ -112,20 +112,21 @@ public class AbstractDataService implements DataService
     }
 
     @Override
-    public Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
+    public Collection<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
     {
         return null;
     }
 
     @Override
-    public Tag createTag()
+    public Tag findOrCreateTag()
     {
         return null;
     }
 
     @Override
-    public Category createCategory()
+    public Category findOrCreateCategory()
     {
         return null;
     }
+
 }
