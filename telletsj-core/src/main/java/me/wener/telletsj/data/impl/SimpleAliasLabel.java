@@ -7,9 +7,8 @@ import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import me.wener.telletsj.data.AliasLabel;
-
 @Data
-@Accessors(chain = true)
+@Accessors
 public class SimpleAliasLabel<T> implements AliasLabel<T>
 {
     private final Set<String> aliases = Sets.newHashSet();
@@ -30,5 +29,13 @@ public class SimpleAliasLabel<T> implements AliasLabel<T>
     public Set<String> aliases()
     {
         return aliases;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public T setName(String name)
+    {
+        this.name = name;
+        return (T)this;
     }
 }

@@ -27,7 +27,7 @@ public class TestObject
     @Test
     public void testBranch() throws IOException
     {
-        FileContent content = fsm.resolveFile("res:me/wener/telletsj/collect/vfs/github/branch.json").getContent();
+        FileContent content = fsm.resolveFile("res:me/wener/telletsj/collect/github/branch.json").getContent();
         String json = IO.readString(content.getInputStream());
         JsonParser parser = new JsonParser();
         JsonElement root = parser.parse(json);

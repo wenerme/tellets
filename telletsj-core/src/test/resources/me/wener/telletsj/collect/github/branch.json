@@ -1,0 +1,77 @@
+{
+	"name": "master",
+	"commit": {
+		"sha": "7eccdaa5896a683e795cfb50ad3b960a0b00d263",
+		"commit": {
+			"author": {
+				"name": "wener",
+				"email": "wenermail@gmail.com",
+				"date": "2014-10-23T08:20:34Z"
+			},
+			"committer": {
+				"name": "wener",
+				"email": "wenermail@gmail.com",
+				"date": "2014-10-23T08:20:34Z"
+			},
+			"message": "add trickes, change encoding",
+			"tree": {
+				"sha": "7ae3e3d3096737440276049792219659159a839e",
+				"url": "https://api.github.com/repos/wenerme/wener/git/trees/7ae3e3d3096737440276049792219659159a839e"
+			},
+			"url": "https://api.github.com/repos/wenerme/wener/git/commits/7eccdaa5896a683e795cfb50ad3b960a0b00d263",
+			"comment_count": 0
+		},
+		"url": "https://api.github.com/repos/wenerme/wener/commits/7eccdaa5896a683e795cfb50ad3b960a0b00d263",
+		"html_url": "https://github.com/wenerme/wener/commit/7eccdaa5896a683e795cfb50ad3b960a0b00d263",
+		"comments_url": "https://api.github.com/repos/wenerme/wener/commits/7eccdaa5896a683e795cfb50ad3b960a0b00d263/comments",
+		"author": {
+			"login": "wenerme",
+			"id": 1777211,
+			"avatar_url": "https://avatars.githubusercontent.com/u/1777211?v=2",
+			"gravatar_id": "",
+			"url": "https://api.github.com/users/wenerme",
+			"html_url": "https://github.com/wenerme",
+			"followers_url": "https://api.github.com/users/wenerme/followers",
+			"following_url": "https://api.github.com/users/wenerme/following{/other_user}",
+			"gists_url": "https://api.github.com/users/wenerme/gists{/gist_id}",
+			"starred_url": "https://api.github.com/users/wenerme/starred{/owner}{/repo}",
+			"subscriptions_url": "https://api.github.com/users/wenerme/subscriptions",
+			"organizations_url": "https://api.github.com/users/wenerme/orgs",
+			"repos_url": "https://api.github.com/users/wenerme/repos",
+			"events_url": "https://api.github.com/users/wenerme/events{/privacy}",
+			"received_events_url": "https://api.github.com/users/wenerme/received_events",
+			"type": "User",
+			"site_admin": false
+		},
+		"committer": {
+			"login": "wenerme",
+			"id": 1777211,
+			"avatar_url": "https://avatars.githubusercontent.com/u/1777211?v=2",
+			"gravatar_id": "",
+			"url": "https://api.github.com/users/wenerme",
+			"html_url": "https://github.com/wenerme",
+			"followers_url": "https://api.github.com/users/wenerme/followers",
+			"following_url": "https://api.github.com/users/wenerme/following{/other_user}",
+			"gists_url": "https://api.github.com/users/wenerme/gists{/gist_id}",
+			"starred_url": "https://api.github.com/users/wenerme/starred{/owner}{/repo}",
+			"subscriptions_url": "https://api.github.com/users/wenerme/subscriptions",
+			"organizations_url": "https://api.github.com/users/wenerme/orgs",
+			"repos_url": "https://api.github.com/users/wenerme/repos",
+			"events_url": "https://api.github.com/users/wenerme/events{/privacy}",
+			"received_events_url": "https://api.github.com/users/wenerme/received_events",
+			"type": "User",
+			"site_admin": false
+		},
+		"parents": [
+			{
+				"sha": "19370bb1c6776ca0835b43bec2c72a6775167c35",
+				"url": "https://api.github.com/repos/wenerme/wener/commits/19370bb1c6776ca0835b43bec2c72a6775167c35",
+				"html_url": "https://github.com/wenerme/wener/commit/19370bb1c6776ca0835b43bec2c72a6775167c35"
+			}
+		]
+	},
+	"_links": {
+		"self": "https://api.github.com/repos/wenerme/wener/branches/master",
+		"html": "https://github.com/wenerme/wener/tree/master"
+	}
+}

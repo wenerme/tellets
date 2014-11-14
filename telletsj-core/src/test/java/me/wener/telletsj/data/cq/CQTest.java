@@ -1,11 +1,14 @@
 package me.wener.telletsj.data.cq;
 
 import com.google.common.collect.Lists;
+import com.googlecode.cqengine.codegen.AttributesGenerator;
+import ignored.Car;
 import java.util.ArrayList;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleState;
 import me.wener.telletsj.data.DataService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CQTest
@@ -37,7 +40,7 @@ public class CQTest
     }
 
     @Test
-    private void testLinkAndSha()
+    public void testLinkAndSha()
     {
         Article a = service.getArticleByLink("link-67");
         Article b = service.getArticleBySha("sha-67");
@@ -76,5 +79,15 @@ public class CQTest
         assert a.getDescription().equals("description-" + i);
         assert a.getState().equals(ArticleState.PUBLISH);
         assert a.getTimestamp() == i;
+    }
+
+
+    @Test
+    @Ignore
+    public void gen()
+    {
+        System.out
+                .println(AttributesGenerator.generateSeparateAttributesClass(ArticleVO.class, Car.class.getPackage()));
+//        System.out.println(AttributesGenerator.generateAttributesForPastingIntoTargetClass(ArticleVO.class));
     }
 }

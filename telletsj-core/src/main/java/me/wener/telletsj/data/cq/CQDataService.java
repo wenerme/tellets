@@ -9,13 +9,10 @@ import com.google.common.collect.Lists;
 import com.googlecode.cqengine.CQEngine;
 import com.googlecode.cqengine.IndexedCollection;
 import com.googlecode.cqengine.attribute.Attribute;
-import com.googlecode.cqengine.attribute.SimpleAttribute;
 import com.googlecode.cqengine.index.hash.HashIndex;
 import com.googlecode.cqengine.index.navigable.NavigableIndex;
 import com.googlecode.cqengine.index.suffix.SuffixTreeIndex;
-import com.googlecode.cqengine.query.Query;
 import com.googlecode.cqengine.query.option.AttributeOrder;
-import com.googlecode.cqengine.query.simple.SimpleQuery;
 import com.googlecode.cqengine.resultset.ResultSet;
 import java.util.Iterator;
 import javax.annotation.Nonnull;
@@ -122,7 +119,7 @@ public class CQDataService extends AbstractDataService
     public Iterable<Article> getArticleOrderByDate(int offset, int limit, boolean descending)
     {
         ResultSet<Article> rs = articles
-                .retrieve(any(CQArticle.TIMESTAMP), queryOptions(orderBy(new AttributeOrder<>(CQArticle.TIMESTAMP, descending))));
+                .retrieve(CQ.any(CQArticle.TIMESTAMP), queryOptions(orderBy(new AttributeOrder<>(CQArticle.TIMESTAMP, descending))));
         return limit(offset, limit, rs.iterator());
     }
 
@@ -132,28 +129,4 @@ public class CQDataService extends AbstractDataService
         return Lists.newArrayList(Iterators.limit(iterator, limit));
     }
 
-    private <T, A> Query<T> any(Attribute<T, A> attribute)
-    {
-        return new SimpleQuery<T, A>(attribute)
-        {
-
-            @Override
-            protected boolean matchesSimpleAttribute(SimpleAttribute<T, A> attribute, T object)
-            {
-                return true;
-            }
-
-            @Override
-            protected boolean matchesNonSimpleAttribute(Attribute<T, A> attribute, T object)
-            {
-                return true;
-            }
-
-            @Override
-            protected int calcHashCode()
-            {
-                return 0;
-            }
-        };
-    }
 }
