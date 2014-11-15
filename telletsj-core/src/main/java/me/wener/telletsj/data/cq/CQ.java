@@ -56,4 +56,40 @@ public class CQ
             }
         };
     }
+
+    public static <O, A> SimpleQuery<O, A> isNull(final Attribute<O, A> attribute)
+    {
+        return new IsNullQuery<>(attribute);
+    }
+
+    static class IsNullQuery<O, A> extends SimpleQuery<O, A>
+    {
+        /**
+         * Creates a new {@link com.googlecode.cqengine.query.simple.SimpleQuery} initialized to make assertions on values of the specified attribute
+         *
+         * @param attribute The attribute on which the assertion is to be made
+         */
+        public IsNullQuery(Attribute<O, A> attribute)
+        {
+            super(attribute);
+        }
+
+        @Override
+        protected boolean matchesSimpleAttribute(SimpleAttribute<O, A> attribute, O object)
+        {
+            return attribute.getValue(object) == null;
+        }
+
+        @Override
+        protected boolean matchesNonSimpleAttribute(Attribute<O, A> attribute, O object)
+        {
+            return attribute.getValues(object) == null;
+        }
+
+        @Override
+        protected int calcHashCode()
+        {
+            return attribute.hashCode();
+        }
+    }
 }

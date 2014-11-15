@@ -4,18 +4,44 @@ import com.google.common.eventbus.EventBus;
 import java.util.Collection;
 import java.util.Set;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleInfo;
 import me.wener.telletsj.data.Category;
 import me.wener.telletsj.data.DataService;
 import me.wener.telletsj.data.Tag;
 
-public class AbstractDataService implements DataService
+public class DataServiceAdapter implements DataService
 {
     @Override
     public Article store(@Nonnull Article article, @Nonnull ArticleInfo info)
     {
         return null;
+    }
+
+    @Nullable
+    @Override
+    public Article store(Article article)
+    {
+        return null;
+    }
+
+    @Override
+    public boolean store(Tag tag)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean store(Category category)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean store(ArticleInfo info)
+    {
+        return false;
     }
 
     @Override
@@ -118,13 +144,13 @@ public class AbstractDataService implements DataService
     }
 
     @Override
-    public Tag findOrCreateTag()
+    public Tag findOrCreateTag(String name)
     {
         return null;
     }
 
     @Override
-    public Category findOrCreateCategory()
+    public Category findOrCreateCategory(String name)
     {
         return null;
     }

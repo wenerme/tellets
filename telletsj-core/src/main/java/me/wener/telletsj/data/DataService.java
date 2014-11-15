@@ -15,6 +15,15 @@ public interface DataService
     @Nullable
     Article store(Article article, ArticleInfo info);
 
+    @Nullable
+    Article store(Article article);
+
+    boolean store(Tag tag);
+
+    boolean store(Category category);
+
+    boolean store(ArticleInfo info);
+
     /**
      * 将会使用该文章的 sha 来判断移除的文章
      */
@@ -87,7 +96,7 @@ public interface DataService
      */
     Collection<Article> getArticleOrderByDate(int offset, int limit, boolean descending);
 
-    Tag findOrCreateTag();
+    Tag findOrCreateTag(String name);
 
-    Category findOrCreateCategory();
+    Category findOrCreateCategory(String name);
 }

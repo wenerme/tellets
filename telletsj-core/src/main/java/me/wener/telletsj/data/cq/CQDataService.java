@@ -2,6 +2,7 @@ package me.wener.telletsj.data.cq;
 
 import static com.google.common.base.Preconditions.*;
 import static com.googlecode.cqengine.query.QueryFactory.*;
+import static me.wener.telletsj.data.cq.CQ.isNull;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterators;
@@ -20,16 +21,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleInfo;
 import me.wener.telletsj.data.Category;
 import me.wener.telletsj.data.Tag;
-import me.wener.telletsj.data.impl.AbstractDataService;
 import me.wener.telletsj.data.impl.ArticleBuilder;
+import me.wener.telletsj.data.impl.CategoryVO;
+import me.wener.telletsj.data.impl.DataServiceAdapter;
+import me.wener.telletsj.data.impl.TagVo;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
-public class CQDataService extends AbstractDataService
+public class CQDataService extends DataServiceAdapter
 {
 
     private final IndexedCollection<ArticleVO> articles;
@@ -46,6 +52,7 @@ public class CQDataService extends AbstractDataService
 
         tags = CQEngine.newInstance();
         tags.addIndex(HashIndex.onAttribute(CQInfo.TAG_NAME));
+
         categories = CQEngine.newInstance();
         categories.addIndex(HashIndex.onAttribute(CQInfo.CATEGORY_NAME));
     }
@@ -57,12 +64,12 @@ public class CQDataService extends AbstractDataService
     }
 
     @Override
-    public Article getArticleBySha(String sha)
+    public ArticleVO getArticleBySha(String sha)
     {
         return oneByEQ(sha, CQArticle.SHA);
     }
 
-    private Article oneByEQ(String val, Attribute<ArticleVO, String> attr)
+    private ArticleVO oneByEQ(String val, Attribute<ArticleVO, String> attr)
     {
         ResultSet<ArticleVO> resultSet = articles.retrieve(equal(attr, val));
         if (resultSet.size() == 0)
@@ -84,7 +91,7 @@ public class CQDataService extends AbstractDataService
         checkArgument(article.getSha().equals(info.getSha()));
 
         ArticleVO vo;
-        if (article instanceof ArticleVO)
+        if (article instanceof ArticleVO && article == info)
             vo = (ArticleVO) article;
         else
             vo = new ArticleVO(article, info);
@@ -95,10 +102,55 @@ public class CQDataService extends AbstractDataService
         Article old = getArticleBySha(article.getSha());
         articles.add(vo);
 
+        tags.addAll(vo.getTags());
+        categories.addAll(vo.getCategories());
 
         return old;
     }
 
+    @Nullable
+    @Override
+    public Article store(Article article)
+    {
+        return store(article, vo(article));
+    }
+
+    @Override
+    public boolean store(ArticleInfo info)
+    {
+        checkArgument(articles.contains(vo(info)), "Wrong info object.");
+        return true;
+    }
+
+    @Override
+    public boolean store(Category category)
+    {
+        Category old = findCategory(category.getName());
+        if (old == category || (old != null && old.equals(category)))
+        {
+            return false;
+        }
+//        if (!categories.contains(category))
+//        {
+//            checkArgument(old == null, "Category with same name already exists.");
+//        }
+        return categories.add(category);
+    }
+
+    @Override
+    public boolean store(Tag tag)
+    {
+        Tag old = findTag(tag.getName());
+        if (old == tag || (old != null && old.equals(tag)))
+        {
+            return false;
+        }
+//        if (!tags.contains(tag))
+//        {
+//            checkArgument(findCategory(tag.getName()) == null, "Tag with same name already exists.");
+//        }
+        return tags.add(tag);
+    }
 
     @Override
     public boolean remove(Article article)
@@ -115,7 +167,7 @@ public class CQDataService extends AbstractDataService
     }
 
     @SuppressWarnings("ConstantConditions")
-    private ArticleVO vo(Article a)
+    private ArticleVO vo(Object a)
     {
         Preconditions.checkArgument(a instanceof ArticleVO, "非内部实现对象");
         return (ArticleVO) a;
@@ -157,13 +209,46 @@ public class CQDataService extends AbstractDataService
     @Override
     public Category findCategory(String name)
     {
-        return categories.retrieve(equal(CQInfo.CATEGORY_NAME, name)).uniqueResult();
+        ResultSet<Category> rs = categories
+                .retrieve(or(equal(CQInfo.CATEGORY_NAME, name), equal(CQInfo.CATEGORY_ALIASES, name)));
+        return oneOrNull(rs);
+    }
+
+    private <T> T oneOrNull(ResultSet<T> rs)
+    {
+        if (rs.isEmpty())
+            return null;
+        return rs.uniqueResult();
     }
 
     @Override
     public Tag findTag(String name)
     {
-        return tags.retrieve(equal(CQInfo.TAG_NAME, name)).uniqueResult();
+        return oneOrNull(tags.retrieve(or(equal(CQInfo.TAG_NAME, name), equal(CQInfo.TAG_ALIASES, name))));
+    }
+
+    @Override
+    public Category findOrCreateCategory(String name)
+    {
+        Category category = findCategory(name);
+        if (category == null)
+        {
+            category = new CategoryVO().setName(name);
+            categories.add(category);
+        }
+        return category;
+    }
+
+    @Override
+    public Tag findOrCreateTag(String name)
+    {
+        Tag tag = findTag(name);
+        if (tag == null)
+        {
+            tag = new TagVo().setName(name);
+            tags.add(tag);
+        }
+        return tag;
     }
 
     @Override
@@ -181,7 +266,7 @@ public class CQDataService extends AbstractDataService
     @Override
     public Collection<Category> getRootCategories()
     {
-        return Lists.newArrayList(categories.retrieve(equal(CQInfo.CATEGORY_PARENT, null)));
+        return Lists.newArrayList(categories.retrieve(isNull(CQInfo.CATEGORY_PARENT)));
     }
 
     @Override

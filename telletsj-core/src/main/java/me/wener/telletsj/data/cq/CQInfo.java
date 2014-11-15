@@ -3,7 +3,6 @@ package me.wener.telletsj.data.cq;
 import com.google.common.collect.Lists;
 import com.googlecode.cqengine.attribute.Attribute;
 import com.googlecode.cqengine.attribute.MultiValueAttribute;
-import com.googlecode.cqengine.attribute.ReflectiveAttribute;
 import com.googlecode.cqengine.attribute.SimpleAttribute;
 import java.util.List;
 import me.wener.telletsj.data.Category;
@@ -40,8 +39,10 @@ class CQInfo
     {
         public String getValue(Category Tag) { return Tag.getName(); }
     };
-    public static final Attribute<Category, Category> CATEGORY_PARENT = ReflectiveAttribute
-            .forField(Category.class, Category.class, "parent");
+    public static final Attribute<Category, Category> CATEGORY_PARENT = new SimpleAttribute<Category, Category>("PARENT")
+    {
+        public Category getValue(Category Tag) { return Tag.getParent(); }
+    };
 
 
     public static final Attribute<Tag, String> TAG_ALIASES = new MultiValueAttribute<Tag, String>("ALIASES")
