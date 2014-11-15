@@ -8,6 +8,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.eventbus.EventBus;
 import com.googlecode.cqengine.CQEngine;
 import com.googlecode.cqengine.IndexedCollection;
 import com.googlecode.cqengine.attribute.Attribute;
@@ -28,10 +29,13 @@ import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleInfo;
 import me.wener.telletsj.data.Category;
 import me.wener.telletsj.data.Tag;
+import me.wener.telletsj.data.event.RemoveEvent;
+import me.wener.telletsj.data.event.StoreEvent;
 import me.wener.telletsj.data.impl.ArticleBuilder;
 import me.wener.telletsj.data.impl.CategoryVO;
 import me.wener.telletsj.data.impl.DataServiceAdapter;
 import me.wener.telletsj.data.impl.TagVo;
+import me.wener.telletsj.util.event.Events;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -41,6 +45,7 @@ public class CQDataService extends DataServiceAdapter
     private final IndexedCollection<ArticleVO> articles;
     private final IndexedCollection<Tag> tags;
     private final IndexedCollection<Category> categories;
+    private final EventBus eventBus;
 
     public CQDataService()
     {
@@ -55,6 +60,8 @@ public class CQDataService extends DataServiceAdapter
 
         categories = CQEngine.newInstance();
         categories.addIndex(HashIndex.onAttribute(CQInfo.CATEGORY_NAME));
+
+        eventBus = Events.createWithExceptionDispatch();
     }
 
     @Override
@@ -82,6 +89,8 @@ public class CQDataService extends DataServiceAdapter
     @Override
     public Article store(@Nonnull Article article, @Nonnull ArticleInfo info)
     {
+        eventBus.post(new StoreEvent(article));
+
         checkNotNull(article.getTitle());
         checkNotNull(article.getLink());
         checkNotNull(article.getTimestamp());
@@ -112,12 +121,16 @@ public class CQDataService extends DataServiceAdapter
     @Override
     public Article store(Article article)
     {
+        eventBus.post(new StoreEvent(article));
+
         return store(article, vo(article));
     }
 
     @Override
     public boolean store(ArticleInfo info)
     {
+        eventBus.post(new StoreEvent(info));
+
         checkArgument(articles.contains(vo(info)), "Wrong info object.");
         return true;
     }
@@ -125,6 +138,8 @@ public class CQDataService extends DataServiceAdapter
     @Override
     public boolean store(Category category)
     {
+        eventBus.post(new StoreEvent(category));
+
         Category old = findCategory(category.getName());
         if (old == category || (old != null && old.equals(category)))
         {
@@ -140,6 +155,8 @@ public class CQDataService extends DataServiceAdapter
     @Override
     public boolean store(Tag tag)
     {
+        eventBus.post(new StoreEvent(tag));
+
         Tag old = findTag(tag.getName());
         if (old == tag || (old != null && old.equals(tag)))
         {
@@ -156,6 +173,9 @@ public class CQDataService extends DataServiceAdapter
     public boolean remove(Article article)
     {
         Article articleBySha = getArticleBySha(article.getSha());
+
+        eventBus.post(new RemoveEvent(articleBySha));
+
         return articles.remove(vo(articleBySha));
     }
 
