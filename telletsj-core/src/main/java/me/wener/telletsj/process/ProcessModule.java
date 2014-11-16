@@ -3,9 +3,9 @@ package me.wener.telletsj.process;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import javax.inject.Named;
-import me.wener.telletsj.util.guice.BaseModule;
-import me.wener.telletsj.util.guice.ClassFilter;
-import me.wener.telletsj.util.guice.PluginLoader;
+import me.wener.telletsj.util.inject.BaseModule;
+import me.wener.telletsj.util.inject.ClassFilter;
+import me.wener.telletsj.util.inject.PluginLoader;
 
 public class ProcessModule extends BaseModule<ProcessModule>
 {

@@ -16,9 +16,9 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
     private final static XMLCommentMetaProcessor INSTANCE = new XMLCommentMetaProcessor();
 
     private final static Pattern SECTION_SPLITTER =
-            Pattern.compile("^\\s*<!--\\s*(?<type>more|summary|paging)\\s*-->\\s*$", Pattern.MULTILINE);
+            Pattern.compile("^\\s*<!---*\\s*(?<type>more|summary|paging)\\s*-*?-->\\s*$", Pattern.MULTILINE);
     private final static Pattern SINGLE_META =
-            Pattern.compile("^\\s*<!--(?<key>[^:]+):(?<value>.*?)-->\\s*$", Pattern.MULTILINE);
+            Pattern.compile("^\\s*<!---*(?<key>[^:]+):(?<value>.*?)-*?-->\\s*$", Pattern.MULTILINE);
     private final static Pattern ALL_META =
             Pattern.compile("(" + SINGLE_META.pattern() + ")+", Pattern.MULTILINE);
 
@@ -32,7 +32,7 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
     {
         String metaContent;
         String restContent;
-        ContentInfo info = new ContentInfo().rawContent(content);
+        ContentInfo info = new ContentInfo().setRawContent(content);
         {
             Matcher matcher = ALL_META.matcher(content);
             if (!matcher.find())
@@ -50,7 +50,7 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
             {
                 String key = matcher.group("key").trim();
                 String value = matcher.group("value").trim();
-                info.meta().put(key, value);
+                info.getMeta().put(key, value);
             }
         }
         {
@@ -62,12 +62,12 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
                 String sectionContent = restContent
                         .substring(lastEnd, matcher.start())
                         .trim();
-                info.sections().get(type).add(ProcessUtil.trim(sectionContent));
+                info.getSections().get(type).add(ProcessUtil.trim(sectionContent));
                 lastEnd = matcher.end();
             }
 
             if (restContent.length() != lastEnd)
-                info.restContent(ProcessUtil.trim(restContent.substring(lastEnd)));
+                info.setRestContent(ProcessUtil.trim(restContent.substring(lastEnd)));
         }
         return info;
     }

@@ -1,6 +1,5 @@
 package me.wener.telletsj.process;
 
-import com.google.common.base.Splitter;
 import java.util.List;
 import java.util.Map;
 import me.wener.telletsj.BaseTest;
@@ -11,19 +10,19 @@ public class XMLCommentsTest extends BaseTest
 {
     public static void assertSimplePost(ContentInfo info)
     {
-        Map<String, String> meta = info.meta();
+        Map<String, String> meta = info.getMeta();
 
         assert meta.get("title").equals("simple post, simple article");
         assert meta.get("date").equals("2014-11-01");
         assert meta.get("link").equals("start");
-        Splitter COMMA_SPLITTER = Splitter.on(',').omitEmptyStrings().trimResults();
-        List<String> category = COMMA_SPLITTER.splitToList(meta.get("category"));
+        List<String> category = info.list("category");
         assert category.contains("moon");
         assert category.contains("sun");
         assert category.size() == 2;
 
-        assert info.sectionOne("more").equals("description here");
-        assert info.restContent().equals("detail here");
+        assert info.section("more").equals("description here");
+        assert info.getRestContent().equals("detail here");
+        assert meta.get("state").equals("publish");
     }
 
     @Test

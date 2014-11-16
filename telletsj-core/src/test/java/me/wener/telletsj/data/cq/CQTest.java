@@ -1,9 +1,12 @@
 package me.wener.telletsj.data.cq;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.googlecode.cqengine.codegen.AttributesGenerator;
 import ignored.Car;
 import java.util.ArrayList;
+import javax.inject.Inject;
 import me.wener.telletsj.data.Article;
 import me.wener.telletsj.data.ArticleState;
 import me.wener.telletsj.data.DataService;
@@ -14,6 +17,7 @@ import org.junit.Test;
 public class CQTest
 {
 
+    @Inject
     private DataService service;
 
     @Test
@@ -50,15 +54,12 @@ public class CQTest
         assertN(a, i);
     }
 
-    public void testFindByTag()
-    {
-
-    }
-
     @Before
     public void setup()
     {
-        service = new CQDataService();
+        Injector injector = Guice.createInjector(new CQDataModule());
+        injector.injectMembers(this);
+
         for (int i = 0; i < 100; i++)
         {
             Article article = service
@@ -70,7 +71,7 @@ public class CQTest
                     .state(ArticleState.PUBLISH)
                     .description("description-" + i)
                     .timestamp((long) i)
-                    .build();
+                    .article();
             service.store(article, service.getArticleInfo(article));
 
         }

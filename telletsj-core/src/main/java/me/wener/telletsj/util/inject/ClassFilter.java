@@ -1,4 +1,4 @@
-package me.wener.telletsj.util.guice;
+package me.wener.telletsj.util.inject;
 
 import com.google.common.base.Predicate;
 import java.lang.annotation.Annotation;

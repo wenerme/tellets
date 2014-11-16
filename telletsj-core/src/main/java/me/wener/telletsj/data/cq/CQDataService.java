@@ -100,9 +100,13 @@ public class CQDataService extends DataServiceAdapter
         checkArgument(article.getSha().equals(info.getSha()));
 
         ArticleVO vo;
-        if (article instanceof ArticleVO && article == info)
+        if (article instanceof ArticleVO)
+        {
             vo = (ArticleVO) article;
-        else
+            // 如果 vo 和 info 不是同一个对象,则把info的值放到 vo
+            if (vo != info)
+                vo.info(info);
+        } else
             vo = new ArticleVO(article, info);
 
         if (articles.contains(vo))

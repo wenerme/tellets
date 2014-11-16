@@ -6,8 +6,8 @@ import me.wener.telletsj.data.impl.ArticleBuilder;
 class ArticleVOBuilder extends ArticleBuilder
 {
     @Override
-    public Article build()
+    public Article article()
     {
-        return new ArticleVO(super.build());
+        return new ArticleVO(super.article());
     }
 }

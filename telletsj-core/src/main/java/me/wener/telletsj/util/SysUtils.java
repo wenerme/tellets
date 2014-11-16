@@ -1,6 +1,5 @@
 package me.wener.telletsj.util;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
 import java.io.File;
@@ -10,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,7 +23,7 @@ public class SysUtils
 
     public static String tryGetResourceAsString(String path)
     {
-        return tryGetResourceAsString(path, Charsets.UTF_8);
+        return tryGetResourceAsString(path, StandardCharsets.UTF_8);
     }
 
     public static String tryGetResourceAsString(String path, Charset charset)

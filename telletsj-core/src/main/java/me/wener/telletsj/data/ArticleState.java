@@ -16,5 +16,10 @@ public enum ArticleState
     /**
      * 对于未知的文章状态,应该在文章的meta里放入原有的状态信息.
      */
-    UNKNOWN
+    UNKNOWN;
+
+    public static ArticleState fromString(String str)
+    {
+        return valueOf(str.toUpperCase().trim());
+    }
 }

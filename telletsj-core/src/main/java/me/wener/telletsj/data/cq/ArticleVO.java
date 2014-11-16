@@ -60,4 +60,10 @@ class ArticleVO implements Article, ArticleInfo
         categories.addAll(i.getCategories());
         meta.putAll(i.getMeta());
     }
+
+    public void info(ArticleInfo i)
+    {
+        clearInfo();
+        addInfo(i);
+    }
 }

@@ -8,7 +8,7 @@ import me.wener.telletsj.BaseTest;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestService extends BaseTest
+public class TestProcessService extends BaseTest
 {
     @Inject
     private ProcessService service;

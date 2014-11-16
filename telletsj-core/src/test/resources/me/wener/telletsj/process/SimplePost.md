@@ -1,9 +1,9 @@
 <!-- title: simple post, simple article -->
-<!-- date: 2014-11-01 -->
+<!--- date: 2014-11-01 ---->
 <!-- link : start -->
-<!-- category: moon , sun -->
+<!---- category: moon , sun -->
 <!---- tag : say, hi ---->
-<!-- state: published -------->
+<!-- state: publish -------->
 
 
 description here

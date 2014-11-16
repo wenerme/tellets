@@ -4,12 +4,15 @@ import com.google.common.collect.ImmutableSet;
 import java.net.URI;
 import java.util.Set;
 import javax.inject.Inject;
-import javax.inject.Named;
 import me.wener.telletsj.collect.CollectSource;
 import me.wener.telletsj.collect.SourceProvider;
+import me.wener.telletsj.util.inject.Enabled;
 import org.apache.commons.vfs2.FileSystemManager;
 
-@Named
+/**
+ * URI 格式: github:username/repo/path/to/file
+ */
+@Enabled
 public class GitHubProvider implements SourceProvider
 {
     private final static Set<String> SCHEMES = ImmutableSet.of("github");

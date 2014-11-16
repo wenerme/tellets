@@ -7,12 +7,13 @@ import java.net.URI;
 import me.wener.telletsj.collect.impl.CollectModule;
 import me.wener.telletsj.collect.impl.SourceContent;
 import me.wener.telletsj.collect.impl.SourceProviderManager;
+import me.wener.telletsj.core.TelletsJModule;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 @Ignore
-public class TestService
+public class TestCollectService
 {
     private Injector injector;
     @Inject
@@ -23,7 +24,8 @@ public class TestService
     @Before
     public void setup()
     {
-        injector = Guice.createInjector(new CollectModule());
+        injector = Guice.createInjector(new TelletsJModule());
+        injector = injector.createChildInjector(injector.getInstance(CollectModule.class));
         injector.injectMembers(this);
     }
 

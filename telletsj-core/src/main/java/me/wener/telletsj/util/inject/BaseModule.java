@@ -1,4 +1,4 @@
-package me.wener.telletsj.util.guice;
+package me.wener.telletsj.util.inject;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
