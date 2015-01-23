@@ -2,7 +2,9 @@ package me.wener.telletsj.util.event;
 
 import java.util.EventObject;
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString(callSuper = true)
 public abstract class BaseEvent extends EventObject
 {
     @Getter

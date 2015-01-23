@@ -12,6 +12,12 @@
     <artifactId>telletsj-core</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>1.2.0</version>
+        </dependency>
         <!--guice-->
         <dependency>
             <groupId>com.google.inject</groupId>
