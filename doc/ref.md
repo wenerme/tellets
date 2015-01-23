@@ -13,6 +13,13 @@ http://coapp.org/reference/garrett-flavored-markdown.html
 
 参考主题设计
 http://robots.thoughtbot.com/a-tmux-crash-course
+http://blog.mirthlab.com/2009/06/01/thrift-vs-protocol-bufffers-vs-json/
+
+GitHub provider
+---------------
+只是将路径转换为https
+URI规范
+github:username/project[:branch]/path/to/file
 
 post vs article
 ---------------
