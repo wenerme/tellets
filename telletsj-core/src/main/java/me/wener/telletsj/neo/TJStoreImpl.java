@@ -2,6 +2,7 @@ package me.wener.telletsj.neo;
 
 import com.google.common.base.Preconditions;
 import java.util.Map;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 import me.wener.telletsj.neo.api.TJStore;
@@ -47,6 +48,30 @@ public class TJStoreImpl implements TJStore
         Preconditions.checkNotNull(id);
         this.contents.put(findId(id), content);
         return this;
+    }
+
+    @Override
+    public Set<String> getTags()
+    {
+        return null;
+    }
+
+    @Override
+    public Set<String> getCategories()
+    {
+        return null;
+    }
+
+    @Override
+    public Set<String> getIdByTag(String tag)
+    {
+        return null;
+    }
+
+    @Override
+    public Set<String> getIdByCategory(String category)
+    {
+        return null;
     }
 
     private String findId(String id)

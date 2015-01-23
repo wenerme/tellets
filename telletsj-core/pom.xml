@@ -18,6 +18,11 @@
             <artifactId>redisson</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.6.1</version>
+        </dependency>
         <!--guice-->
         <dependency>
             <groupId>com.google.inject</groupId>
