@@ -18,3 +18,5 @@ ignored
 .idea
 
 target
+
+atlassian-ide-plugin.xml
