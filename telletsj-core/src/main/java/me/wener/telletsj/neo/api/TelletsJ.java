@@ -2,13 +2,7 @@ package me.wener.telletsj.neo.api;
 
 import com.google.common.eventbus.EventBus;
 
-public interface Tellets
+public interface TelletsJ
 {
-    TJStore getStore();
-
-    TJGather getGather();
-
-    TJProcessor getProcessor();
-
     EventBus getEventBus();
 }

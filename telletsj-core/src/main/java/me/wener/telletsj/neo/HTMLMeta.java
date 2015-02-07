@@ -1,42 +1,38 @@
-package me.wener.telletsj.process.processor;
+package me.wener.telletsj.neo;
 
-import com.google.inject.Singleton;
+import com.google.common.collect.Maps;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.inject.Named;
-import me.wener.telletsj.process.ContentInfo;
-import me.wener.telletsj.process.NoMetaException;
-import me.wener.telletsj.process.ProcessException;
-import me.wener.telletsj.process.ProcessUtil;
 
-@Named
-@Singleton
-public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
+public class HTMLMeta
 {
-    private final static XMLCommentMetaProcessor INSTANCE = new XMLCommentMetaProcessor();
 
     private final static Pattern SECTION_SPLITTER =
             Pattern.compile("^\\s*<!---*\\s*(?<type>more|summary|paging)\\s*-*?-->\\s*$", Pattern.MULTILINE);
     private final static Pattern SINGLE_META =
             Pattern.compile("^\\s*<!---*(?<key>[^:]+):(?<value>.*?)-*?-->\\s*$", Pattern.MULTILINE);
-    private final static Pattern ALL_META =
-            Pattern.compile("(" + SINGLE_META.pattern() + ")+", Pattern.MULTILINE);
+    private final static Pattern ALL_META = Pattern.compile("(" + SINGLE_META.pattern() + ")+", Pattern.MULTILINE);
 
-    public XMLCommentMetaProcessor()
+    public static boolean isMatch(String content)
     {
-        super("markdown|md|mdown|mkd|mkdn|mdwn|mdtxt|mdtext".split("\\|"));
+        return content.startsWith("<!--");
     }
 
-    @Override
-    public ContentInfo process(final String content) throws ProcessException
+    public static Map<String, Object> process(final String content)
     {
         String metaContent;
         String restContent;
-        ContentInfo info = new ContentInfo().setRawContent(content);
+
+        Map<String, Object> data = Maps.newHashMap();
+        data.put("content", content);
+
         {
             Matcher matcher = ALL_META.matcher(content);
             if (!matcher.find())
-                throw new NoMetaException();
+            {
+                return null;
+            }
             int lastEnd = matcher.end();
             while (matcher.find())
                 lastEnd = matcher.end();
@@ -50,7 +46,7 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
             {
                 String key = matcher.group("key").trim();
                 String value = matcher.group("value").trim();
-                info.getMeta().put(key, value);
+                data.put(key, value);
             }
         }
         {
@@ -62,13 +58,13 @@ public class XMLCommentMetaProcessor extends ExtensionDetectProcessor
                 String sectionContent = restContent
                         .substring(lastEnd, matcher.start())
                         .trim();
-                info.getSections().get(type).add(ProcessUtil.trim(sectionContent));
+                data.put("section:" + type, sectionContent);
                 lastEnd = matcher.end();
             }
 
             if (restContent.length() != lastEnd)
-                info.setRestContent(ProcessUtil.trim(restContent.substring(lastEnd)));
+                data.put("restContent", restContent.substring(lastEnd));
         }
-        return info;
+        return data;
     }
 }

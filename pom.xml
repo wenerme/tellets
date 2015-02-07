@@ -7,7 +7,7 @@
     <groupId>me.wener.telletsj</groupId>
     <artifactId>telletsj-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.2.1-SNAPSHOT</version>
     <modules>
         <module>telletsj-core</module>
         <module>telletsj-rs</module>
@@ -15,7 +15,7 @@
 
     <properties>
         <!--相关模块版本-->
-        <telletsj.version>0.0.1-SNAPSHOT</telletsj.version>
+        <telletsj.version>0.2.1-SNAPSHOT</telletsj.version>
 
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

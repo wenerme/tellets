@@ -13,8 +13,6 @@ public class TJStoreImpl implements TJStore
     @Inject
     private Map<String, Map<String, Object>> metadata;
     private Map<String, String> contents;
-    private Map<String, String> linkMap;// link to id
-    private Map<String, String> sha1Map;// sha1 to id
 
     @Override
     public Map<String, Object> getMeta(String id)

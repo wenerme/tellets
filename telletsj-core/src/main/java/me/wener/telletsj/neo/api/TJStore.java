@@ -28,5 +28,4 @@ public interface TJStore
     Set<String> getIdByTag(String tag);
 
     Set<String> getIdByCategory(String category);
-
 }

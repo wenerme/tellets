@@ -69,3 +69,6 @@ format
 : string
 : 文章内容格式类型,例如 markdown,gh-markdown,slides
 : 前端会根据不同的类型来呈现内容
+
+
+tellets 基于事件驱动

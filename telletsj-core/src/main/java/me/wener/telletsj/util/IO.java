@@ -31,12 +31,12 @@ public class IO
         return com.google.common.io.Files.hash(file, SHA_FUNCTION).toString();
     }
 
-    public static String readString(File file) throws IOException
+    public static String toString(File file) throws IOException
     {
         return new String(Files.readAllBytes(file.toPath()), DEFAULT_CHARSET);
     }
 
-    public static String readString(InputStream inputStream) throws IOException
+    public static String toString(InputStream inputStream) throws IOException
     {
         return CharStreams.toString(new InputStreamReader(inputStream, DEFAULT_CHARSET));
     }

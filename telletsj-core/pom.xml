@@ -5,7 +5,7 @@
     <parent>
         <artifactId>telletsj-parent</artifactId>
         <groupId>me.wener.telletsj</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.2.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -20,6 +20,23 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-core</artifactId>
+            <version>3.6.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-props</artifactId>
+            <version>3.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-bean</artifactId>
+            <version>3.6.3</version>
+        </dependency>
+
         <!--guice-->
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -44,24 +61,10 @@
         <!--日志记录-->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
 
         <!--辅助-->
         <dependency>
@@ -80,11 +83,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.pegdown</groupId>
-            <artifactId>pegdown</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-vfs2</artifactId>
         </dependency>
@@ -100,52 +98,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.json</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.cqengine</groupId>
-            <artifactId>cqengine</artifactId>
-        </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>com.squareup.dagger</groupId>-->
-        <!--<artifactId>dagger</artifactId>-->
-        <!--<version>1.2.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.squareup.dagger</groupId>-->
-        <!--<artifactId>dagger-compiler</artifactId>-->
-        <!--<version>1.2.2</version>-->
-        <!--<optional>true</optional>-->
-        <!--</dependency>-->
-
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>apt-maven-plugin</artifactId>
-                <version>1.1.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>target/generated-sources/java</outputDirectory>
-                            <processor>com.mysema.query.apt.QuerydslAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
 

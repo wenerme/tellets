@@ -28,7 +28,7 @@ public class TestObject
     public void testBranch() throws IOException
     {
         FileContent content = fsm.resolveFile("res:me/wener/telletsj/collect/github/branch.json").getContent();
-        String json = IO.readString(content.getInputStream());
+        String json = IO.toString(content.getInputStream());
         JsonParser parser = new JsonParser();
         JsonElement root = parser.parse(json);
         JsonElement element = root
@@ -46,7 +46,7 @@ public class TestObject
     public void testBlob() throws IOException
     {
         FileContent content = fsm.resolveFile("res:me/wener/telletsj/collect/github/blob.json").getContent();
-        String json = IO.readString(content.getInputStream());
+        String json = IO.toString(content.getInputStream());
         BlobObject blob = new Gson().fromJson(json, BlobObject.class);
         assert blob.getContent().contains("Blog");
         System.out.println(blob.getContent());

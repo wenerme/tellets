@@ -13,6 +13,6 @@ public class VFSFetcher implements Fetcher
     @Override
     public String fetch(String url) throws IOException
     {
-        return IO.readString(fsm.resolveFile(url).getContent().getInputStream());
+        return IO.toString(fsm.resolveFile(url).getContent().getInputStream());
     }
 }

@@ -23,7 +23,7 @@ public class FileObjectSourceContent extends SourceContent
     @SneakyThrows
     protected void fillContent()
     {
-        String content = IO.readString(file.getContent().getInputStream());
+        String content = IO.toString(file.getContent().getInputStream());
         setContent(content);
     }
 }

@@ -19,7 +19,7 @@ class LazyFileLoadSourceContent extends SourceContent
     {
         try
         {
-            setContent(IO.readString(file));
+            setContent(IO.toString(file));
         } catch (IOException e)
         {
             throw new CollectionException(e);

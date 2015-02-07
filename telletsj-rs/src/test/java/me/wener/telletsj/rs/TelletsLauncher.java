@@ -43,6 +43,12 @@ public class TelletsLauncher
     }
 
     @Test
+    public void testAPI()
+    {
+
+    }
+
+    @Test
     public void testSimple()
     {
         try

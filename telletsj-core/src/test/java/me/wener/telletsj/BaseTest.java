@@ -36,6 +36,6 @@ public class BaseTest
     @SneakyThrows
     public String readString(InputStream is)
     {
-        return IO.readString(is);
+        return IO.toString(is);
     }
 }
