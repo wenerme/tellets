@@ -1,0 +1,56 @@
+*.espressostorage
+*.esproj
+*.pxm
+.DS_Store
+
+.htaccess
+verify.php
+
+posts/*.md
+posts/*.jpg
+
+templates/*
+!templates/simple/
+
+plugins/*
+!plugins/index.php
+
+posts/*
+!posts/index.php
+
+cache/*.png
+cache/*.jpeg
+cache/*.jpg
+
+data/cache/*
+data/config.php
+
+data/templates/*
+!data/templates/default/
+
+data/plugins/*
+!data/plugins/index.php
+
+data/posts/*
+!data/posts/you-ready-to-go.md
+
+# eclipse project file
+.project
+.buildpath
+.settings
+
+# jetbrain IDE
+.idea
+
+# ignore my study
+test.php
+
+# ignore the wiki
+wiki/*
+
+# not used, maybe later
+
+lib/*
+test/*
+composer.json
+wiki
