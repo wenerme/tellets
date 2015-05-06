@@ -10,9 +10,10 @@
 
 <!-- more -->
 
-Tellets-EN
+Tellets
 ==========
-
+Let's tell!
+A lightweight blogging platform.
 Tellets is a markup based blog platform.
 
 Main features

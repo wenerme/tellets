@@ -1,56 +1,82 @@
-*.espressostorage
-*.esproj
-*.pxm
-.DS_Store
 
-.htaccess
-verify.php
+### Go template
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
 
-posts/*.md
-posts/*.jpg
+# Folders
+_obj
+_test
 
-templates/*
-!templates/simple/
+# Architecture specific extensions/prefixes
+*.[568vq]
+[568vq].out
 
-plugins/*
-!plugins/index.php
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
 
-posts/*
-!posts/index.php
+_testmain.go
 
-cache/*.png
-cache/*.jpeg
-cache/*.jpg
+*.exe
+*.test
+*.prof
 
-data/cache/*
-data/config.php
 
-data/templates/*
-!data/templates/default/
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
-data/plugins/*
-!data/plugins/index.php
+*.iml
 
-data/posts/*
-!data/posts/you-ready-to-go.md
+## Directory-based project format:
+.idea/
+# if you remove the above rule, at least ignore the following:
 
-# eclipse project file
-.project
-.buildpath
-.settings
+# User-specific stuff:
+# .idea/workspace.xml
+# .idea/tasks.xml
+# .idea/dictionaries
 
-# jetbrain IDE
-.idea
+# Sensitive or high-churn files:
+# .idea/dataSources.ids
+# .idea/dataSources.xml
+# .idea/sqlDataSources.xml
+# .idea/dynamic.xml
+# .idea/uiDesigner.xml
 
-# ignore my study
-test.php
+# Gradle:
+# .idea/gradle.xml
+# .idea/libraries
+
+# Mongo Explorer plugin:
+# .idea/mongoSettings.xml
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+
+
 
 # ignore the wiki
-wiki/*
-
-# not used, maybe later
-
-lib/*
-test/*
-composer.json
 wiki
+
+

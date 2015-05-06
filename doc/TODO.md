@@ -1,4 +1,12 @@
-﻿
+﻿# GO
+* [ ] 实现 Github 数据读取
+* [ ] 解析元信息
+* [] 存储元信息和文章数据
+* [] REST 服务提供元信息和文章数据
+
+
+# PHP
+
 ### X 从写的项目名 更改为 tellets 继承 dropplets 的 后缀,tell means you wanner say somthing.
 
 tellets also mean  lets tell
