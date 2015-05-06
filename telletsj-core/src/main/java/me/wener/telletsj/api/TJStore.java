@@ -1,19 +1,22 @@
-package me.wener.telletsj.neo.api;
+package me.wener.telletsj.api;
 
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 数据存储
+ */
 public interface TJStore
 {
     Map<String, Object> getMeta(String id);
 
-    TJStore setMeta(String id, Map<String, Object> meta);
+    TJStore storeMeta(String id, Map<String, Object> meta);
 
     boolean exists(String id);
 
     String getContent(String id);
 
-    TJStore setContent(String id, String content);
+    TJStore storeContent(String id, String content);
 
     /**
      * @return 所有的标签列表
@@ -25,7 +28,9 @@ public interface TJStore
      */
     Set<String> getCategories();
 
-    Set<String> getIdByTag(String tag);
+    Set<String> findByTag(String tag);
 
-    Set<String> getIdByCategory(String category);
+    Set<String> findByCategory(String category);
+
+    Iterable<String> findAll();
 }

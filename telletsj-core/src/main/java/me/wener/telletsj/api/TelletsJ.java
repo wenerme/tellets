@@ -1,4 +1,4 @@
-package me.wener.telletsj.neo.api;
+package me.wener.telletsj.api;
 
 import com.google.common.eventbus.EventBus;
 

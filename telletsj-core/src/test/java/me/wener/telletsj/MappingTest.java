@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import me.wener.telletsj.neo.api.Article;
+import me.wener.telletsj.api.Article;
 import me.wener.telletsj.util.Mapping;
 import org.junit.Test;
 

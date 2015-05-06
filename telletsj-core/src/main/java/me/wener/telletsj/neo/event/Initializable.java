@@ -2,5 +2,5 @@ package me.wener.telletsj.neo.event;
 
 public interface Initializable
 {
-    void initialize(Object... args);
+    void initialize(String... args);
 }

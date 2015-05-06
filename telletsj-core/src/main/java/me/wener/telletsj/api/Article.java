@@ -1,4 +1,4 @@
-package me.wener.telletsj.neo.api;
+package me.wener.telletsj.api;
 
 import java.util.Collection;
 import java.util.Date;
@@ -19,7 +19,7 @@ public interface Article
 
     String sha();
 
-    String summary();
+    String brief();
 
     String content();
 
@@ -39,7 +39,7 @@ public interface Article
 
     Article sha(String val);
 
-    Article summary(String val);
+    Article brief(String val);
 
     Article content(String val);
 
