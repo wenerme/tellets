@@ -1,16 +1,51 @@
 package tellets
-import "time"
+import (
+	"time"
+	"errors"
+)
 
-type (
-MetaParser interface {
-	Parse(string) (Meta, error)
+type MetaParser interface {
+	Parse(string) (*Meta, error)
 	CanParse(filename string) bool
 	Name() string
 }
-MetaParserManager interface {
 
+var MetaParserManager = createMetaParserManager()
+func createMetaParserManager() *metaParserManager {
+	mgr := &metaParserManager{
+		make(map[string]MetaParser),
+	}
+
+	return mgr
 }
-)
+type metaParserManager struct {
+	parsers map[string]MetaParser
+}
+func (mgr *metaParserManager)Register(p MetaParser) error {
+	if p.Name() == "" {
+		return errors.New("Parser must have a name")
+	}
+	if _, exists := mgr.parsers[p.Name()]; exists {
+		return errors.New("Parser with same name already exists")
+	}
+	mgr.parsers[p.Name()] = p
+	log.Info("Register parser %s", p.Name())
+	return nil
+}
+
+func (mgr *metaParserManager)Parser(name string) MetaParser {
+	return mgr.parsers[name]
+}
+func (mgr *metaParserManager)Parse(fn, content string) (m *Meta, err error) {
+	for n, p := range mgr.parsers {
+		if !p.CanParse(fn) {continue}
+		m, err=p.Parse(content)
+		if err != nil {
+			log.Error("Use %s to parse %s failed: %s", n, fn, err)
+		}
+	}
+	return nil, errors.New("No parser can parse "+fn)
+}
 
 type Meta struct {
 	// Required
@@ -47,5 +82,8 @@ type MetaStorage interface {
 	FindByLink(string) Meta
 	FindByTags([]string) []Meta
 	FindByCategories([]string) []Meta
+	Content(string) string
+	Store(*Meta, string)
+	Remove(*Meta)
 }
 

@@ -1,0 +1,18 @@
+# Online yaml editor http://nodeca.github.io/js-yaml/
+
+data-source:
+    - git:wenerme/wener
+    - git:wenerme/bbvm/README.md
+    - git:wenerme/bbvm/doc/bbvm-spec.md
+    - git:wenerme/asp.net.SaySay/README.md
+    - git:wenerme/greedy_snake/README.md
+    - git:wenerme/java.blog/README.md
+    - git:wenerme/GTetris/README.md
+
+author:
+    name: wener
+    email: wener@wener.me
+    website: http://hi.wener.me
+
+option:
+    github-token: 7a2c0a914abd3d0835f76a9cf369db449ed596a4

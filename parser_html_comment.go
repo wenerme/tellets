@@ -16,12 +16,18 @@ import (
 // <!-- state: published -->
 // <!-- link: tellets -->
 type htmlCommentParser struct { }
-var HtmlCommentParser htmlCommentParser
 var (
 	regHtmlCommentSection = regexp.MustCompile(`(?m)^\s*<!---*\s*(?P<type>more|summary|paging)\s*-*?-->\s*$`)
 	regHtmlCommentSinglePair = regexp.MustCompile(`(?m)^\s*<!---*(?P<key>[^:]+):(?P<value>.*?)-*?-->\s*$`)
 	regHtmlCommentAllPair = regexp.MustCompile(`\A(\s*<!---*(?P<key>[^:]+):(?P<value>.*?)-*?-->)+`)
+	regHtmlCommentFilenameTest = regexp.MustCompile(`\.(md|markdown|html|htm)$`)
 )
+func (htmlCommentParser)Name() string {
+	return "HtmlComment"
+}
+func (htmlCommentParser)CanParse(fn string) bool {
+	return regHtmlCommentFilenameTest.Match([]byte(fn))
+}
 func (htmlCommentParser)Parse(c string) (*Meta, error) {
 	metaStr := regHtmlCommentAllPair.FindString(c)
 	m := matchToMap(regHtmlCommentSinglePair, metaStr)
@@ -140,4 +146,8 @@ func parseDate(s string) *time.Time {
 
 	glog.Error("Can not parse date "+s)
 	return nil
+}
+
+func init() {
+	MetaParserManager.Register(&htmlCommentParser{})
 }
