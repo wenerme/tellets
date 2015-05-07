@@ -26,49 +26,15 @@ web
 	分类
 
 
-文章元信息内容
+host/perm-link
+	应该跳转到 host/perm-link/link 类似于 stackoverflow 的 url 格式
 
-title
-: string
-: 文章标题,会呈现在 url 中
+列表页
+host/search/category=a,b,c&tag=e,f,g&title=xx&content=xx
+host/category/a,b,c
+host/tag/a,b,c
 
-category
-: array
-: 文章分类
-
-tag
-: array
-: 文章标签
-
-date
-: date
-: 发表时间
-
-modify-date
-: date
-: 上次修改时间
-
-link
-: string
-: 文章URL中显示, 如果不指定, 则会使用标题来生成
-
-perm-link
-: string
-: 永久链接, 如果没有, 则使用 link
-: 可以为一串数字或简单的字符,要求唯一
-
-state
-: string
-: 发布状态, 只有发布状态为 `published` 才会被现实
-
-features
-: array
-: 指定一些特性,主要用于提示解析器或前端等做一些特性上的处理
-
-format
-: string
-: 文章内容格式类型,例如 markdown,gh-markdown,slides
-: 前端会根据不同的类型来呈现内容
-
-
-tellets 基于事件驱动
+json 数据
+host/v1/meta/${id}
+host/v1/content/${id}
+host/v1/search/${conditions}
