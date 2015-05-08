@@ -5,18 +5,78 @@ import (
 	"fmt"
 	"strings"
 	tellets "../."
+	"github.com/google/go-github/github"
+	"golang.org/x/oauth2"
+//	"gopkg.in/yaml.v2"
 )
 
-
-func main() {
-	t4()
+type TelletsConfig struct {
+	DataSource []string
 }
 
+func main() {
+	run()
+}
+func run() {
+	_= tellets.T
+	_= tellets.Server
+	select {} // block forever
+}
+func t6() {
+	//	b, err := ioutil.ReadFile("cfg.yaml")
+	//	if err != nil { panic(err)}
+	//	c := string(b)
+	//	yaml.Unmarshal(c,struct{})
+}
+// tokenSource is an oauth2.TokenSource which returns a static access token
+type tokenSource struct {
+	token *oauth2.Token
+}
+
+// Token implements the oauth2.TokenSource interface
+func (t *tokenSource) Token() (*oauth2.Token, error) {
+	return t.token, nil
+}
+
+func t5() {
+	ts := &tokenSource{
+		&oauth2.Token{AccessToken: tellets.T.Option()["github-token"]},
+	}
+
+	tc := oauth2.NewClient(oauth2.NoContext, ts)
+
+	client := github.NewClient(tc)
+
+	// list all repositories for the authenticated user
+	{
+		l, _, err := client.RateLimits()
+		if err != nil { panic(err)}
+		fmt.Println(l)
+	}
+	{
+
+	}
+	{
+		//		repo, _, err := client.Repositories.Get("wenerme", "wener")
+		//		if err != nil { panic(err) }
+		//		fmt.Println(repo)
+	}
+
+	{
+		//		repo, _, err := client.Repositories.Get("wenerme", "wener")
+		//		refs, _, err := client.Git.GetTree("wenerme", "wener", repo.MasterBranch, true)
+		//		if err != nil { panic(err) }
+		//		for _, r := range refs {
+		//			fmt.Println(r)
+		//		}
+		//		client.Git.GetBlob()
+	}
+}
 func t4() {
 	b, err := ioutil.ReadFile("README.md")
 	if err != nil { panic(err)}
 	c := string(b)
-	m, err := tellets.HtmlCommentParser.Parse(c)
+	m, err := tellets.MetaParserManager.Parser("HtmlComment").Parse(c)
 	if err!= nil {panic(err)}
 	fmt.Printf("%+v\n", m);
 }

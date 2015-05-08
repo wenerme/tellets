@@ -59,8 +59,6 @@ func matchToMap(r *regexp.Regexp, c string) (map[string]string) {
 func mapToMeta(m map[string]string, meta *Meta) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println("Recovered in f", r)
-			// find out exactly what the error was and set err
 			switch x := r.(type) {
 				case string:
 				err = errors.New(x)
@@ -69,9 +67,6 @@ func mapToMeta(m map[string]string, meta *Meta) (err error) {
 				default:
 				err = errors.New("Unknown panic")
 			}
-			// invalidate rep
-			err = nil
-			// return the modified err and rep
 		}
 	}()
 

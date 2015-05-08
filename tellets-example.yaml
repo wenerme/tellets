@@ -9,10 +9,22 @@ data-source:
     - git:wenerme/java.blog/README.md
     - git:wenerme/GTetris/README.md
 
+
+option:
+    github-token: 7a2c0a914abd3d0835f76a9cf369db449ed596a4
+
+storage: in-memory
+
 author:
     name: wener
     email: wener@wener.me
     website: http://hi.wener.me
 
-option:
-    github-token: 7a2c0a914abd3d0835f76a9cf369db449ed596a4
+
+external-links:
+    wener@StackOverflow: http://stackoverflow.com/users/1870054/wener
+    wener@github: http://github.com/wenerme
+    wener@G+: http://github.com/wenerme
+
+
+description: One wener, One dream

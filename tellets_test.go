@@ -11,7 +11,7 @@ func TestTelletsConfig(t *testing.T) {
 	_=assert
 	b, err := ioutil.ReadFile("tellets-example.yaml")
 	if err != nil { panic(err)}
-	tl := &tellets{}
+	tl := &telletsCfg{}
 	err = yaml.Unmarshal(b, tl)
 	if err != nil { panic(err)}
 
