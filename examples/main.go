@@ -10,17 +10,7 @@ import (
 //	"gopkg.in/yaml.v2"
 )
 
-type TelletsConfig struct {
-	DataSource []string
-}
-
 func main() {
-	run()
-}
-func run() {
-	_= tellets.T
-	_= tellets.Server
-	select {} // block forever
 }
 func t6() {
 	//	b, err := ioutil.ReadFile("cfg.yaml")
@@ -40,7 +30,7 @@ func (t *tokenSource) Token() (*oauth2.Token, error) {
 
 func t5() {
 	ts := &tokenSource{
-		&oauth2.Token{AccessToken: tellets.T.Option()["github-token"]},
+		//		&oauth2.Token{AccessToken: tellets.T.Option()["github-token"]},
 	}
 
 	tc := oauth2.NewClient(oauth2.NoContext, ts)

@@ -11,7 +11,8 @@ data-source:
 
 
 option:
-    github-token: 7a2c0a914abd3d0835f76a9cf369db449ed596a4
+    github-token: YOUR-GITHUB-TOKEN
+    cors: origin=*,method=GET|POST
 
 storage: in-memory
 

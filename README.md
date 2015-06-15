@@ -10,6 +10,7 @@
 <!-- option: comment=true -->
 <!-- author: wener<wener@wener.me>(http://hi.wener.me) -->
 
+__OUTDATED__ Readme is outdated
 
 Tellets
 ==========

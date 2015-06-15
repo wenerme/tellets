@@ -2,12 +2,10 @@ package tellets
 import (
 	"regexp"
 	"strings"
-	"fmt"
 	"time"
 	"github.com/golang/glog"
 	"errors"
 )
-
 // 以 HTML 注释的形式
 // <!-- title: Tellets README -->
 // <!-- category: Posting -->
@@ -15,7 +13,7 @@ import (
 // <!-- date: 2013/12/7 -->
 // <!-- state: published -->
 // <!-- link: tellets -->
-type htmlCommentParser struct { }
+type htmlCommentParser struct {}
 var (
 	regHtmlCommentSection = regexp.MustCompile(`(?m)^\s*<!---*\s*(?P<type>more|summary|paging)\s*-*?-->\s*$`)
 	regHtmlCommentSinglePair = regexp.MustCompile(`(?m)^\s*<!---*(?P<key>[^:]+):(?P<value>.*?)-*?-->\s*$`)
@@ -28,8 +26,11 @@ func (htmlCommentParser)Name() string {
 func (htmlCommentParser)CanParse(fn string) bool {
 	return regHtmlCommentFilenameTest.Match([]byte(fn))
 }
-func (htmlCommentParser)Parse(c string) (*Meta, error) {
-	metaStr := regHtmlCommentAllPair.FindString(c)
+func (p htmlCommentParser)Parse(c *Collection) (*Meta, error) {
+	if !p.CanParse(c.Filename) {
+		return nil, ErrCanNotParse
+	}
+	metaStr := regHtmlCommentAllPair.FindString(c.Content)
 	m := matchToMap(regHtmlCommentSinglePair, metaStr)
 	meta := &Meta{}
 	mapToMeta(m, meta)
@@ -38,7 +39,7 @@ func (htmlCommentParser)Parse(c string) (*Meta, error) {
 		sum := parts[0]
 		sum = sum[len(metaStr):]
 		//		sum = strings.TrimSpace(sum)
-		meta.Summary = sum
+		meta.SetIntro(sum)
 	}
 	return meta, nil
 }
@@ -70,55 +71,29 @@ func mapToMeta(m map[string]string, meta *Meta) (err error) {
 		}
 	}()
 
-	meta.Title = m["titile"]
-	meta.PermLink = m["perm-link"]
-	meta.Link = m["link"]
-	meta.Format = m["format"]
+	meta.SetTitle(m["titile"])
+	meta["perm-link"] = m["perm-link"]
+	meta["link"] = m["link"]
+	meta["format"] = m["format"]
 	meta.Categories = strings.Split(m["category"], ",")
 	meta.Tags = strings.Split(m["tag"], ",")
-	meta.Author = strings.Split(m["author"], ",")
-	meta.Features = strings.Split(m["feature"], ",")
-	meta.State = m["state"]
+	meta.SetAuthors = strings.Split(m["author"], ",")
+	meta.SetFeatures(strings.Split(m["feature"], ","))
 	{
 		d := m["date"]
 		if d != "" {
-			meta.Date = parseDate(d)
+			meta.SetDate(parseDate(d))
 		}
 	}
 	{
 		d := m["last-modified-date"]
 		if d != "" {
-			meta.LastModifiedDate = parseDate(d)
+			meta.SetLastModifiedDate(parseDate(d))
 		}
 	}
 	return
 }
 
-type metaMap map[string]string
-func (m metaMap)Get(k string) string {
-	return m[k]
-}
-func (m metaMap)TryGet(k string, def string) string {
-	if v, ok := m[k]; ok {
-		return strings.TrimSpace(v)
-	}
-	return def
-}
-func (m metaMap)TryGetAndTrim(k string, def string) (string) {
-	return strings.TrimSpace(m.TryGet(k, def))
-}
-func (m metaMap)GetAndTrim(k string) (string) {
-	return strings.TrimSpace(m.Get(k))
-}
-
-func oneOfKey(m map[string]string, keys... string) string {
-	for _, k := range keys {
-		if v, ok := m[k]; ok {
-			return strings.TrimSpace(v)
-		}
-	}
-	panic(fmt.Sprint("Require one of keys ", keys))
-}
 
 var timeFormats[]string = []string{
 	time.ANSIC,
@@ -144,5 +119,7 @@ func parseDate(s string) *time.Time {
 }
 
 func init() {
-	MetaParserManager.Register(&htmlCommentParser{})
+	//	T.Hook(HookInit, func() {
+	//		MetaParserManager.Register(&htmlCommentParser{})
+	//	})
 }

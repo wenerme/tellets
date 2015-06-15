@@ -1,3 +1,14 @@
+<!-- title: Tellets - 一个轻量级的博客平台 -->
+<!-- category: Posting -->
+<!-- tag: Project,Go,Java,PHP -->
+<!-- date: 2013/12/7 -->
+<!-- last-modified-date: 2015/6/15 -->
+<!-- state: published -->
+<!-- link: tellets-一个轻量级的博客平台 -->
+<!-- perm-link: tellets-cn -->
+<!-- format: markdown -->
+<!-- option: comment=true -->
+<!-- author: wener<wener@wener.me>(http://hi.wener.me) -->
 
 Tellets
 ========
@@ -14,7 +25,7 @@ Tellets 是一个基于Markup的博客平台.
 * 0 配置
 * 简单的Hook系统,编写插件得心应手
 * 无繁杂的管理系统,你只需要写就可以了
-* 集成了 disqus和多说,可选择打开.
+* 集成了 disqus 和多说,可选择打开.
 
 更多信息,请前往 __[wiki](https://github.com/wenerme/tellets/wiki/)__
 
