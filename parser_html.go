@@ -34,13 +34,14 @@ func (p htmlCommentParser)Parse(c *Collection) (*Meta, error) {
 	m := matchToMap(regHtmlCommentSinglePair, metaStr)
 	meta := &Meta{}
 	mapToMeta(m, meta)
-	parts := regHtmlCommentSection.Split(c, -1)
+	parts := regHtmlCommentSection.Split(c.Content, -1)
 	if len(parts)> 1 {
 		sum := parts[0]
 		sum = sum[len(metaStr):]
 		//		sum = strings.TrimSpace(sum)
-		meta.SetIntro(sum)
+		meta.Intro = sum
 	}
+	meta.Content = c.Content[len(metaStr):]
 	return meta, nil
 }
 func matchToMap(r *regexp.Regexp, c string) (map[string]string) {
@@ -71,24 +72,27 @@ func mapToMeta(m map[string]string, meta *Meta) (err error) {
 		}
 	}()
 
-	meta.SetTitle(m["titile"])
-	meta["perm-link"] = m["perm-link"]
-	meta["link"] = m["link"]
-	meta["format"] = m["format"]
-	meta.Categories = strings.Split(m["category"], ",")
-	meta.Tags = strings.Split(m["tag"], ",")
-	meta.SetAuthors = strings.Split(m["author"], ",")
-	meta.SetFeatures(strings.Split(m["feature"], ","))
+	o := Option(m)
+	o.Get("title", &meta.Title)
+	o.Get("perm-link", &meta.PermLink)
+	o.Get("link", &meta.Link)
+	o.Get("format", &meta.Format)
+	o.Get("category", &meta.Categories)
+	o.Get("tag", &meta.Tags)
+	o.Get("author", &meta.Authors)
+	o.Get("feature", &meta.Features)
+
 	{
 		d := m["date"]
 		if d != "" {
-			meta.SetDate(parseDate(d))
+			meta.Date = parseDate(d)
 		}
 	}
+
 	{
 		d := m["last-modified-date"]
 		if d != "" {
-			meta.SetLastModifiedDate(parseDate(d))
+			meta.LastModifiedDate = parseDate(d)
 		}
 	}
 	return
@@ -119,7 +123,7 @@ func parseDate(s string) *time.Time {
 }
 
 func init() {
-	//	T.Hook(HookInit, func() {
-	//		MetaParserManager.Register(&htmlCommentParser{})
-	//	})
+	RegisterParser(func() Parser {
+		return htmlCommentParser{}
+	})
 }
