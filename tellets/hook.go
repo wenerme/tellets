@@ -3,9 +3,8 @@ import (
 	"fmt"
 	"reflect"
 )
+
 type HookType string
-
-
 
 // Call sequence
 // Before -> Parent Before -> Parent After -> After

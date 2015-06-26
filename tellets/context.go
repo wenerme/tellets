@@ -9,6 +9,7 @@ type Context interface {
 	// Add a value to context
 	// return false if add failed because this type already exists
 	Add(interface{}) bool;
+	AddType(interface{}, reflect.Type) bool;
 	// return false if the type already exists in parent context
 	Set(interface{}) bool;
 	// Set the value to parameter
@@ -40,6 +41,16 @@ type context struct {
 }
 func (c *context)Add(v interface{}) bool {
 	t := reflect.TypeOf(v)
+	if _, oc := c.Find(t); oc != nil {
+		return false
+	}
+	c.values[t] = v
+	return true
+}
+func (c *context)AddType(v interface{}, t reflect.Type) bool {
+	if !reflect.TypeOf(v).AssignableTo(t) {
+		panic(fmt.Sprintf("Add value(%T) type not implement specified tye(%v)", v, t))
+	}
 	if _, oc := c.Find(t); oc != nil {
 		return false
 	}
@@ -119,17 +130,7 @@ func (c *context)Call(fu interface{}) ([]interface{}, error) {
 func (c context)ToString() string {
 	return c.name
 }
-func CreateChildContext(c Context) Context {
-	ctx := c.(*context)
-	ctx.children +=1
-	return &context{
-		ctx,
-		make(map[reflect.Type]interface{}),
-		0,
-		fmt.Sprintf("%v#%d", c, ctx.children),
-	}
-}
-func CreateChildContextWithName(c Context, name string) Context {
+func CreateChildContext(c Context, name string) Context {
 	ctx := c.(*context)
 	ctx.children +=1
 	return &context{

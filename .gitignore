@@ -79,5 +79,6 @@ crashlytics-build.properties
 # ignore the wiki
 wiki
 # Ignore tellets configuration
-tellets.yaml
-
+tellets.wener.ini
+posts/*
+/*.db

@@ -4,19 +4,45 @@ import (
 	"io/ioutil"
 	"fmt"
 	"strings"
-	tellets "../."
+	"github.com/wenerme/tellets/tellets"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 //	"gopkg.in/yaml.v2"
+	"github.com/go-ini/ini"
+	"flag"
 )
 
+var GlobalConfigFile = "tellets.global.ini"
+var DefaultConfigFile = "tellets.ini"
+
 func main() {
+	_ = tellets.Version
+
+	t6()
+}
+type Info struct{
+	PackageName string
+}
+
+func t7() {
+	i := &Info{}
+	err := ini.MapToWithMapper(&i, ini.TitleUnderscore, []byte("packag_name=ini"))
+	if err != nil { panic(err) }
+	fmt.Printf("%#v\n",i)
+
 }
 func t6() {
-	//	b, err := ioutil.ReadFile("cfg.yaml")
-	//	if err != nil { panic(err)}
-	//	c := string(b)
-	//	yaml.Unmarshal(c,struct{})
+	f, err := ini.Load(DefaultConfigFile, GlobalConfigFile)
+	if err != nil { panic(err) }
+	f.BlockMode=false
+
+	flag.String("name", "foo", "a string")
+
+	fmt.Println(f.Section("github").KeysHash()["token"])
+	fmt.Println(f.Section("security").KeysHash()["cors"])
+	fmt.Println(f.Section("database").KeysHash())
+
+
 }
 // tokenSource is an oauth2.TokenSource which returns a static access token
 type tokenSource struct {
@@ -61,14 +87,6 @@ func t5() {
 		//		}
 		//		client.Git.GetBlob()
 	}
-}
-func t4() {
-	b, err := ioutil.ReadFile("README.md")
-	if err != nil { panic(err)}
-	c := string(b)
-	m, err := tellets.MetaParserManager.Parser("HtmlComment").Parse(c)
-	if err!= nil {panic(err)}
-	fmt.Printf("%+v\n", m);
 }
 
 func t3() {

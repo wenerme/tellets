@@ -123,7 +123,7 @@ func parseDate(s string) *time.Time {
 }
 
 func init() {
-	RegisterParser(func() Parser {
+	RegisterParser(func(t Tellets) Parser {
 		return htmlCommentParser{}
 	})
 }

@@ -3,6 +3,7 @@ import (
 	"net/url"
 	"gopkg.in/fsnotify.v1"
 )
+
 var fsWatcher *fsnotify.Watcher
 
 type directoryCollector struct {
