@@ -14,6 +14,6 @@ func TestOption(t *testing.T) {
 	//	reflect.DeepEqual(opt, CreateOption(opt.ToString()))
 	assert.EqualValues(opt, ParseOption(opt.ToString()))
 	i := 0
-	opt.Get("i", &i)
+	opt.Get(&i, "i")
 	assert.EqualValues(123, i)
 }

@@ -7,7 +7,6 @@ import (
 )
 type Config struct {
 	*ini.File
-	Database DatabaseConfig
 }
 
 type DatabaseConfig struct {
@@ -38,17 +37,28 @@ func loadConfig() *Config {
 	cfg := &Config{}
 	cfg.File = f
 
-	{
-		sec := cfg.Section("database")
-		m := sec.KeysHash()
-		cfg.Database.Type = m["type"]
-		cfg.Database.Host = m["host"]
-		cfg.Database.Password = m["password"]
-		cfg.Database.User = m["user"]
-		cfg.Database.Path = m["path"]
-		cfg.Database.Schema = m["schema"]
-		cfg.Database.Debug, _ = strconv.ParseBool(m["debug"])
-	}
-
 	return cfg
+}
+
+func (cfg *Config)CollectSources() []string {
+	m := cfg.Section("sources").KeysHash()
+	sources := make([]string, 0)
+	for _, v := range m {
+		sources = append(sources, v)
+	}
+	return sources
+}
+
+func (cfg *Config)DatabaseConfig() DatabaseConfig {
+	sec := cfg.Section("database")
+	m := sec.KeysHash()
+	db := DatabaseConfig{}
+	db.Type = m["type"]
+	db.Host = m["host"]
+	db.Password = m["password"]
+	db.User = m["user"]
+	db.Path = m["path"]
+	db.Schema = m["schema"]
+	db.Debug, _ = strconv.ParseBool(m["debug"])
+	return db
 }

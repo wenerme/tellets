@@ -38,7 +38,7 @@ func newTelletsByOption(c *Config) Tellets {
 		cfg:c,
 	}
 	{
-		cfg := &t.Config().Database
+		cfg := t.Config().DatabaseConfig()
 		log.Info("Create Storage with %#v", cfg)
 
 		db, err := gorm.Open(cfg.Type, cfg.Path)
@@ -56,5 +56,6 @@ func newTelletsByOption(c *Config) Tellets {
 	for _, f := range plugins {
 		f(t)
 	}
+	t.Hook().DoHook(HookInitTellets, t.Context())
 	return t
 }

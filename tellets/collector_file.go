@@ -9,7 +9,7 @@ var fsWatcher *fsnotify.Watcher
 type directoryCollector struct {
 }
 
-func (c *directoryCollector)Collect(u *url.URL) ([]Collection, error) {
+func (c *directoryCollector)Collect(u *url.URL) ([]Entry, error) {
 	if u.Scheme != "file" {
 		return nil, ErrCanNotCollect
 	}

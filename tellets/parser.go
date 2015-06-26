@@ -7,5 +7,5 @@ import "errors"
 var ErrCanNotParse = errors.New("Can not parse")
 
 type Parser interface {
-	Parse(*Collection) (*Meta, error)
+	Parse(*Entry) error
 }

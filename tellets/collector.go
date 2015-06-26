@@ -9,24 +9,18 @@ import (
 var ErrCanNotCollect = errors.New("Can not collect")
 
 type Collector interface {
-	Collect(*url.URL) ([]Collection, error)
+	Collect(*url.URL) ([]Entry, error)
 }
 
 type CollectServer interface {
 	Tellets() Tellets
 	Hook() Hook
 	Context() Context
-	Collect(*url.URL) ([]Collection, error)
-	Parse(*Collection) (*Meta, error)
+	Collect(string) ([]Entry, error)
+	Parse(*Entry) error
 	// Discover url, collection or meta
 	Discover(interface{})
 }
-
-type CollectSource struct {
-	URL  string
-	CRON string
-}
-
 
 type collectSvr struct {
 	parsers    []Parser
@@ -34,6 +28,7 @@ type collectSvr struct {
 	t          Tellets
 	c          Context
 	h          Hook
+	sources []string
 }
 
 func NewCollectServer(t Tellets) CollectServer {
@@ -47,7 +42,9 @@ func NewCollectServer(t Tellets) CollectServer {
 	cs.Context().AddType(cs, reflect.TypeOf((*CollectServer)(nil)).Elem())
 	cs.Context().Add(&cs.parsers)
 	cs.Context().Add(&cs.collectors)
-	cs.Hook().DoHook(HookCollectorInit, cs.Context())
+	cs.sources = t.Config().CollectSources()
+	cs.Hook().DoHook(HookInitCollector, cs.Context())
+	cs.Hook().DoHook(HookInitParser, cs.Context())
 	return cs
 }
 func (cs *collectSvr)Hook() Hook {
@@ -59,7 +56,9 @@ func (cs *collectSvr)Context() Context {
 func (cs *collectSvr)Tellets() Tellets {
 	return cs.t
 }
-func (cs *collectSvr)Collect(u *url.URL) (all []Collection, err error) {
+func (cs *collectSvr)Collect(s string) (all []Entry, err error) {
+	u, err := url.Parse(s)
+	if err!=nil { return nil, err }
 	err = ErrCanNotCollect
 	for _, c := range cs.collectors {
 		all, err = c.Collect(u)
@@ -68,10 +67,10 @@ func (cs *collectSvr)Collect(u *url.URL) (all []Collection, err error) {
 	}
 	return
 }
-func (cs *collectSvr)Parse(u *Collection) (m *Meta, err error) {
+func (cs *collectSvr)Parse(u *Entry) (err error) {
 	err = ErrCanNotParse
 	for _, c := range cs.parsers {
-		m, err = c.Parse(u)
+		err = c.Parse(u)
 		if err == ErrCanNotParse { continue }
 		return
 	}
@@ -84,28 +83,24 @@ func (cs *collectSvr)Discover(v interface{}) {
 	}
 	reSwitch:
 	switch v.(type){
-		case url.URL:
-		v = &v
-		goto reSwitch
-		case *url.URL:
-		all, err := cs.Collect(v.(*url.URL))
-		if err != nil {log.Warning("Discover %v failed due to %v", v, err)}
+		case string:
+		all, err := cs.Collect(v.(string))
+		if err != nil {panic(err)}
 		cs.Discover(all)
-		case []Collection:
+		case []Entry:
 		v = &v
 		goto reSwitch
-		case *[]Collection:
-		for _, c := range *v.(*[]Collection) {
+		case *[]Entry:
+		for _, c := range *v.(*[]Entry) {
 			cs.Discover(c)
 		}
-		case Collection:
+		case Entry:
 		v = &v
 		goto reSwitch
-		case *Collection:
-		m, err := cs.Parse(v.(*Collection))
+		case *Entry:
+		err := cs.Parse(v.(*Entry))
 		if err != nil {log.Warning("Parse %v failed due to %v", v, err)}
-		// FIXME
-		_=m
+	// FIXME
 		default:
 		log.Warning("I don't know how to discover this %#v", v)
 	}

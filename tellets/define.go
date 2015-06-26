@@ -6,10 +6,10 @@ const (
 )
 
 const (
-	HookTelletsInit HookType = "TelletsInit"
-	HookCollectorInit = "CollectorInit"
-	HookParserInit = "ParserInit"
-	HookAPIInit = "APIInit"
+	HookInitTellets HookType = "TelletsInit"
+	HookInitCollector = "CollectorInit"
+	HookInitParser = "ParserInit"
+	HookWebServer = "HookWebServer"
 	HookParse = "Parse"
 	HookCollect = "Collect"
 )
@@ -28,10 +28,10 @@ type Initializable interface {
 // f is func(any injectable parameter)Collector
 func RegisterCollector(f interface{}) {
 	RegisterPlugin(func(t Tellets) {
-		t.Hook().HookAfter(HookCollectorInit, func(svr CollectServer, s *[]Collector) {
+		t.Hook().HookAfter(HookInitCollector, func(svr CollectServer, s *[]Collector) {
 			p, err := svr.Context().Call(f)
 			if err != nil { panic(err) }
-			log.Debug("Add parser %T", p[0])
+			log.Debug("Add collector %T", p[0])
 			*s = append(*s, p[0].(Collector))
 		})
 	})
@@ -40,7 +40,7 @@ func RegisterCollector(f interface{}) {
 // f is func(any injectable parameter)Parser
 func RegisterParser(f interface{}) {
 	RegisterPlugin(func(t Tellets) {
-		t.Hook().HookAfter(HookCollectorInit, func(svr CollectServer, s *[]Parser) {
+		t.Hook().HookAfter(HookInitParser, func(svr CollectServer, s *[]Parser) {
 			p, err := svr.Context().Call(f)
 			if err != nil { panic(err) }
 			log.Debug("Add parser %T", p[0])

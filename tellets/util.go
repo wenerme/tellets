@@ -7,6 +7,8 @@ import (
 	"encoding/json"
 	"github.com/op/go-logging"
 	"os"
+	"time"
+	"github.com/syndtr/goleveldb/leveldb/errors"
 )
 
 var log = logging.MustGetLogger("tellets")
@@ -34,23 +36,40 @@ func ParseOption(s string) Option {
 	}
 	return Option(m)
 }
-func (o Option)Get(k string, val interface{}) bool {
-	if v, ok := o[k]; !ok {
-		return false
-	}else {
-		switch val.(type){
-			case *int, *uint, *int8, *uint8, *int16, *uint16, *int32, *uint32, *int64, *uint64, *float32, *float64:
-			err := json.Unmarshal([]byte(v), val)
-			if err != nil {panic(err)}
-			case *[]string:
-			*val.(*[]string) = o.trim(strings.Split(v, ","))
-			case *string:
-			*val.(*string) = v
-			default:
-			panic(fmt.Sprintf("Unsupported type %v", reflect.TypeOf(val)))
+func (o Option)Get(val interface{}, keys... string) error {
+	var s string
+	var found bool
+	for _, k := range keys {
+		if v, ok := o[k]; ok {
+			s = v
+			found = true
+			break
 		}
 	}
-	return true
+
+	if !found {
+		return errors.New("Keys not found")
+	}
+
+	switch val.(type){
+		case *int, *uint, *int8, *uint8, *int16, *uint16, *int32, *uint32, *int64, *uint64, *float32, *float64:
+		err := json.Unmarshal([]byte(s), val)
+		return err
+		case *[]string:
+		*val.(*[]string) = o.trim(strings.Split(s, ","))
+		case *string:
+		*val.(*string) = s
+		case *time.Time:
+		if t, err := parseTime(s); err == nil {
+			*val.(*time.Time) = t
+		}else {
+			return err
+		}
+		default:
+		return errors.New(fmt.Sprintf("Unsupported type %v", reflect.TypeOf(val)))
+	}
+
+	return nil
 }
 func (o Option)Trim() {
 	for k, v := range o {
@@ -72,4 +91,27 @@ func (o Option)trim(s []string) []string {
 		s[i] = strings.TrimSpace(v)
 	}
 	return s
+}
+
+
+var timeFormats[]string = []string{
+	time.ANSIC,
+	time.RFC3339,
+	time.RFC1123,
+	"2006/1/2 15:4",
+	"2006/01/02 15:4",
+	"2006-1-2 15:4",
+	"2006-01-02 15:4",
+	"2006/1/2",
+	"2006/01/02",
+	"2006-1-2",
+	"2006-01-02",
+}
+func parseTime(s string) (time.Time, error) {
+	for _, f := range timeFormats {
+		t, err := time.Parse(f, s)
+		if err == nil { return t, nil}
+	}
+
+	return time.Time{}, errors.New("Can not parse date "+s)
 }

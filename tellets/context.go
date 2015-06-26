@@ -8,8 +8,14 @@ import (
 type Context interface {
 	// Add a value to context
 	// return false if add failed because this type already exists
+	// Can not add Context
 	Add(interface{}) bool;
-	AddType(interface{}, reflect.Type) bool;
+	// Add a value as specified type
+	// t could be reflect.Type, func()TheType,(Type)nil
+	AddType(v interface{}, t interface{}) bool;
+	// Add a value by a func, func can have parameter that this context hold
+	// e.g. func(s Server)Reader{return s.Reader} will inject Reader
+	AddFunc(interface{}) bool;
 	// return false if the type already exists in parent context
 	Set(interface{}) bool;
 	// Set the value to parameter
@@ -17,6 +23,7 @@ type Context interface {
 	//  *int will match the type int
 	//  *string will match the string
 	//  string will panic
+	//  Context will always return this
 	Get(interface{}) bool;
 	// Match all these types
 	// values is the same size as types
@@ -33,6 +40,7 @@ type Context interface {
 	Find(reflect.Type) (interface{}, Context)
 }
 
+var _contextType = reflect.TypeOf((*Context)(nil)).Elem()
 type context struct {
 	parent   *context
 	values   map[reflect.Type]interface{}
@@ -41,16 +49,40 @@ type context struct {
 }
 func (c *context)Add(v interface{}) bool {
 	t := reflect.TypeOf(v)
-	if _, oc := c.Find(t); oc != nil {
-		return false
-	}
-	c.values[t] = v
-	return true
+	return c.AddType(v, t)
 }
-func (c *context)AddType(v interface{}, t reflect.Type) bool {
-	if !reflect.TypeOf(v).AssignableTo(t) {
-		panic(fmt.Sprintf("Add value(%T) type not implement specified tye(%v)", v, t))
+func (c *context)AddFunc(f interface{}) bool {
+	v := reflect.ValueOf(f)
+	if v.Kind() != reflect.Func && v.Type().NumOut() != 1 {
+		panic(errors.New("Must use a func(...)T"))
 	}
+
+	values, err := c.Call(f)
+	if err != nil { panic(err) }
+	return c.AddType(values[0], v.Type().Out(0))
+}
+func (c *context)AddType(v interface{}, vt interface{}) bool {
+	var t reflect.Type
+	if ty, ok := vt.(reflect.Type); ok {
+		t = ty
+	}else {
+		typeOf := reflect.TypeOf(vt)
+		if typeOf.Kind() == reflect.Func {
+			if typeOf.NumOut() != 1 {panic(errors.New("The type func must have one return value"))}
+			t = typeOf.Out(0)
+		}else {
+			panic(errors.New(fmt.Sprintf("Can not use %T as type", vt)))
+		}
+	}
+
+	if !reflect.TypeOf(v).AssignableTo(t) {
+		panic(fmt.Sprintf("Add value(%T) type not implement specified type(%v)", v, t))
+	}
+
+	if t == _contextType {
+		panic("Can not add Context")
+	}
+
 	if _, oc := c.Find(t); oc != nil {
 		return false
 	}
@@ -69,6 +101,11 @@ func (c *context)Get(v interface{}) bool {
 	val := reflect.ValueOf(v)
 	if val.Kind() != reflect.Ptr {
 		panic("Get value from context must use a pointer")
+	}
+	// Get Context
+	if val.Elem().Type() == _contextType {
+		val.Elem().Set(reflect.ValueOf(c))
+		return true
 	}
 	if ov, oc := c.Find(val.Elem().Type()); oc != nil {
 		val.Elem().Set(reflect.ValueOf(ov))

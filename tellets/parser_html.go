@@ -2,8 +2,6 @@ package tellets
 import (
 	"regexp"
 	"strings"
-	"time"
-	"github.com/golang/glog"
 	"errors"
 )
 // 以 HTML 注释的形式
@@ -26,23 +24,23 @@ func (htmlCommentParser)Name() string {
 func (htmlCommentParser)CanParse(fn string) bool {
 	return regHtmlCommentFilenameTest.Match([]byte(fn))
 }
-func (p htmlCommentParser)Parse(c *Collection) (*Meta, error) {
+func (p htmlCommentParser)Parse(c *Entry) error {
 	if !p.CanParse(c.Filename) {
-		return nil, ErrCanNotParse
+		return ErrCanNotParse
 	}
 	metaStr := regHtmlCommentAllPair.FindString(c.Content)
 	m := matchToMap(regHtmlCommentSinglePair, metaStr)
-	meta := &Meta{}
-	mapToMeta(m, meta)
+	post := c.Post
+	mapToMeta(m, c)
 	parts := regHtmlCommentSection.Split(c.Content, -1)
 	if len(parts)> 1 {
 		sum := parts[0]
 		sum = sum[len(metaStr):]
 		//		sum = strings.TrimSpace(sum)
-		meta.Intro = sum
+		post.Intro = sum
 	}
-	meta.Content = c.Content[len(metaStr):]
-	return meta, nil
+	post.Content = c.Content[len(metaStr):]
+	return nil
 }
 func matchToMap(r *regexp.Regexp, c string) (map[string]string) {
 	m := make(map[string]string)
@@ -58,7 +56,7 @@ func matchToMap(r *regexp.Regexp, c string) (map[string]string) {
 	}
 	return m
 }
-func mapToMeta(m map[string]string, meta *Meta) (err error) {
+func mapToMeta(m map[string]string, entry *Entry) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			switch x := r.(type) {
@@ -72,55 +70,21 @@ func mapToMeta(m map[string]string, meta *Meta) (err error) {
 		}
 	}()
 
+	post := entry.Post
 	o := Option(m)
-	o.Get("title", &meta.Title)
-	o.Get("perm-link", &meta.PermLink)
-	o.Get("link", &meta.Link)
-	o.Get("format", &meta.Format)
-	o.Get("category", &meta.Categories)
-	o.Get("tag", &meta.Tags)
-	o.Get("author", &meta.Authors)
-	o.Get("feature", &meta.Features)
-
-	{
-		d := m["date"]
-		if d != "" {
-			meta.Date = parseDate(d)
-		}
-	}
-
-	{
-		d := m["last-modified-date"]
-		if d != "" {
-			meta.LastModifiedDate = parseDate(d)
-		}
-	}
+	o.Get(&post.Title, "title")
+	o.Get(&post.PermLink, "perm-link")
+	o.Get(&post.Link, "link")
+	o.Get(&post.Format, "format")
+	o.Get(&post.Categories, "category")
+	o.Get(&post.Tags, "tag")
+	o.Get(&post.Authors, "author")
+	o.Get(post.PublishDate, "date")
+	o.Get(post.ModifiedDate, "last-modified-date", "modified-date")
 	return
 }
 
 
-var timeFormats[]string = []string{
-	time.ANSIC,
-	time.RFC3339,
-	time.RFC1123,
-	"2006/1/2 15:4",
-	"2006/01/02 15:4",
-	"2006-1-2 15:4",
-	"2006-01-02 15:4",
-	"2006/1/2",
-	"2006/01/02",
-	"2006-1-2",
-	"2006-01-02",
-}
-func parseDate(s string) *time.Time {
-	for _, f := range timeFormats {
-		t, err := time.Parse(f, s)
-		if err == nil { return &t}
-	}
-
-	glog.Error("Can not parse date "+s)
-	return nil
-}
 
 func init() {
 	RegisterParser(func(t Tellets) Parser {
